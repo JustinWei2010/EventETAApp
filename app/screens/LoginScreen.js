@@ -3,8 +3,12 @@ import { Container, Text, View } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as constants from 'app/constants'
+import * as navigation from 'app/actions/navigation'
 
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
 
     render() {
         return (
@@ -27,10 +31,17 @@ export default class LoginScreen extends Component {
     }
 
     _onPressFacebookButton = () => {
-        
+        this.props.actions.navigateTo(constants.SCREEN.HOME)
     }
 
 }
+
+export default connect(state => ({
+    }),
+    (dispatch) => ({
+        actions: bindActionCreators(navigation, dispatch)
+    })
+)(LoginScreen)
 
 const styles = StyleSheet.create({
 
