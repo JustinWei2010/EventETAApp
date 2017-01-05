@@ -1,40 +1,54 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+'use strict'
+import { Container, Text, View } from 'native-base'
+import React, { Component } from 'react'
+import { StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class LoginScreen extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
+
+    render() {
+        return (
+            <Container style={styles.mainContainer}>
+                <View scrollEnabled={false} style={styles.content}>
+                    <View style={styles.logo}>
+                        <Text>
+                            App Logo
+                        </Text>
+                    </View>
+                    <Icon.Button 
+                        name='facebook'
+                        backgroundColor='#3b5998'
+                        onPress={this._onPressFacebookButton}>
+                        Login with Facebook
+                    </Icon.Button>
+                </View>
+            </Container>
+        )
+    }
+
+    _onPressFacebookButton = () => {
+        
+    }
+
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+
+    mainContainer: {
+        backgroundColor: 'white'
+    },
+
+    content: {
+        flex: 1,
+        margin: 30
+    },
+
+    logo: {
+        flex: 1,
+        backgroundColor: '#F6F7F8',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20
+    }
+
+})
