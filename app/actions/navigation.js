@@ -7,3 +7,15 @@ export const navigateTo = (scene) => {
         scene: scene
     }
 }
+
+export const navigateBack = () => {
+    return {
+        type: types.NAVIGATE_BACK
+    }
+}
+
+export const clearHistory = () => {
+    return {
+        type: types.CLEAR_HISTORY
+    }
+}

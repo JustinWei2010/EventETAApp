@@ -1,17 +1,34 @@
 'use strict'
+import { Button, Container, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as navigation from 'app/actions/navigation'
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
 
     render() {
         return (
-            <Text>Home Screen</Text>
+            <Container>
+                <Header>
+                    <Button transparent onPress={this._onClickBackButton}>
+                        <Icon name='ios-arrow-back' />
+                    </Button>
+                    <Title>ETA</Title>
+                </Header>
+            </Container>
         )
+    }
+
+    _onClickBackButton = () => {
+        this.props.actions.navigateBack()
     }
 
 }
 
-const styles = StyleSheet.create({
-
-})
+export default connect(state => ({
+    }),
+    (dispatch) => ({
+        actions: bindActionCreators(navigation, dispatch)
+    })
+)(HomeScreen)
