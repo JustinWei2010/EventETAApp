@@ -1,3 +1,7 @@
 <resources>
+
     <string name="app_name">EventETAApp</string>
+    
+    <!-- FBSDK Sample app id -->
+    <string name="facebook_app_id">1314642828592061</string>
 </resources>
