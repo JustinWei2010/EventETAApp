@@ -11,7 +11,7 @@ import * as navigation from 'app/actions/navigation'
 class AppContainer extends Component {
 
     componentDidMount() {
-        //Mount Callback for popping back stack when back button is pressed on android
+        //Mount Callback for popping history when back button is pressed on android
         BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)    
     }
 
@@ -38,7 +38,7 @@ class AppContainer extends Component {
                 )
 
             default:
-                console.log('No screen found for: ' + this.props.currentScreen)
+                console.log('No screen found for: ' + this.props)
                 return (
                     <LoginScreen />
                 )

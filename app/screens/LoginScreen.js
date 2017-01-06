@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as constants from 'app/constants'
-import * as navigation from 'app/actions/navigation'
+import * as facebook from 'app/actions/facebook'
 
 class LoginScreen extends Component {
 
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
     }
 
     _onPressFacebookButton = () => {
-        this.props.actions.navigateTo(constants.SCREEN.HOME)
+        this.props.actions.fbLogin()
     }
 
 }
@@ -39,7 +39,7 @@ class LoginScreen extends Component {
 export default connect(state => ({
     }),
     (dispatch) => ({
-        actions: bindActionCreators(navigation, dispatch)
+        actions: bindActionCreators(facebook, dispatch)
     })
 )(LoginScreen)
 

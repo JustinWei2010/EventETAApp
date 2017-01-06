@@ -19,7 +19,7 @@ const navigation = (state = _initialState, action = {}) => {
             if (state.history.length > 1) {
                 const updatedHistory = state.history.slice(0, state.history.length-1)
                 return {
-                    currentScreen: updatedHistory[-1],
+                    currentScreen: updatedHistory[updatedHistory.length-1],
                     history: updatedHistory
                 }
             } else {
