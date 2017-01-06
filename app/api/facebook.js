@@ -13,6 +13,10 @@ export const login = async(readPermissions) => {
     }
 }
 
+export const logout = async() => {
+    await LoginManager.logOut()
+}
+
 export const getUserProfile = () => {
     return new Promise((resolve, reject) => {
         const responseCallback = (error, result) => {

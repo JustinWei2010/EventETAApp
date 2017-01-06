@@ -21,6 +21,9 @@ const login = (state = _initialState, action = {}) => {
                 error: action.error
             }
 
+        case types.FB_LOGOUT:
+            return _initialState
+
         default:
             return state;
     }

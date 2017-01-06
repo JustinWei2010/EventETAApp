@@ -21,6 +21,12 @@ export const fbLoginFailed = (error) => {
     }
 }
 
+export const fbLogout = () => {
+    return {
+        type: types.FB_LOGOUT
+    }
+}
+
 export const fbRefreshProfile = (name) => {
     return {
         type: types.FB_REFRESH_PROFILE,

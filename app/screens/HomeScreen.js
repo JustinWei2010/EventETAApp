@@ -3,6 +3,7 @@ import { Button, Container, Content, Header, Icon, Text, Title } from 'native-ba
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as facebook from 'app/actions/facebook'
 import * as navigation from 'app/actions/navigation'
 
 class HomeScreen extends Component {
@@ -18,6 +19,9 @@ class HomeScreen extends Component {
                 </Header>
                 <Content>                  
                     <Text>Hi, {this.props.name}</Text>
+                    <Button onPress={this._onClickLogoutButton}>
+                        Logout!
+                    </Button>
                 </Content>
             </Container>
         )
@@ -27,12 +31,16 @@ class HomeScreen extends Component {
         this.props.actions.navigateBack()
     }
 
+    _onClickLogoutButton = () => {
+        this.props.actions.fbLogout()
+    }
+
 }
 
 export default connect(state => ({
         name: state.fbProfile.name 
     }),
     (dispatch) => ({
-        actions: bindActionCreators(navigation, dispatch)
+        actions: bindActionCreators({ ...facebook, ...navigation }, dispatch)
     })
 )(HomeScreen)

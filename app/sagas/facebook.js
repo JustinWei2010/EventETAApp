@@ -41,6 +41,15 @@ function* _login(action) {
     }
 }
 
+function* _logout(action) {
+    //Clear history since user is not authenticated anymore
+    yield put(navigation.clearHistory())
+    yield [
+        call(fbAPI.logout),
+        put(navigation.navigateTo(constants.SCREEN.LOGIN))
+    ]
+}
+
 export function* fetchFBProfile() {
     try {
         const profile = yield call(fbAPI.getUserProfile)
@@ -55,4 +64,8 @@ export function* fetchFBProfile() {
 
 export function* watchForLogin() {
     yield takeLatest(types.FB_LOGIN, _login)
+}
+
+export function* watchForLogout() {
+    yield takeLatest(types.FB_LOGOUT, _logout)
 }
