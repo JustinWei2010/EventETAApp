@@ -8,13 +8,15 @@ export const login = async(readPermissions) => {
     } else if (await response.deniedPermissions) {
         console.log("Missing permissions: " + response.deniedPermissions)
         throw new Error('We need the requested permissions')
-    } else {
-        return await AccessToken.getCurrentAccessToken()
-    }
+    } 
 }
 
 export const logout = async() => {
     await LoginManager.logOut()
+}
+
+export const getFbToken = () => {
+    return AccessToken.getCurrentAccessToken()
 }
 
 export const getUserProfile = () => {

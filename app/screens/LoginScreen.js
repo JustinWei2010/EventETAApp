@@ -16,7 +16,7 @@ class LoginScreen extends Component {
                 <View scrollEnabled={false} style={styles.content}>
                     <View style={styles.logo}>
                         <Text>
-                            App Logo
+                            Carousel
                         </Text>
                     </View>
                     <Icon.Button 

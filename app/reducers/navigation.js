@@ -1,15 +1,16 @@
 'use strict'
-import * as types from 'app/actions/types'
 import * as constants from 'app/constants'
+import * as types from 'app/actions/types'
 
 const _initialState = {
-    currentScreen: constants.SCREEN.LOGIN,
-    history: [constants.SCREEN.LOGIN]
+    currentScreen: null,
+    history: []
 }
 
 const navigation = (state = _initialState, action = {}) => {
     switch (action.type) {
         case types.NAVIGATE_TO:
+            console.log(state)
             return {
                 currentScreen: action.scene,
                 history: [...state.history, action.scene]
@@ -23,7 +24,8 @@ const navigation = (state = _initialState, action = {}) => {
                     history: updatedHistory
                 }
             } else {
-                return _initialState
+                //Account for edge case if press back when history is empty.
+                return state
             }
 
         case types.CLEAR_HISTORY:

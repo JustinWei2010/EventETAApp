@@ -38,16 +38,13 @@ class AppContainer extends Component {
                 )
 
             default:
-                console.log('No screen found for: ' + this.props)
-                return (
-                    <LoginScreen />
-                )
+                return null
         }
     }
 
     _handleBackAction = () => {
         // If on first screen and back is pressed then exit app
-        if (this.props.history.length === 1) {
+        if (this.props.history.length <= 1) {
             return false
         }
 
