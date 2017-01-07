@@ -43,5 +43,4 @@ export const getUserProfile = () => {
 
         new GraphRequestManager().addRequest(userProfileRequest).start();
     })
-
 }

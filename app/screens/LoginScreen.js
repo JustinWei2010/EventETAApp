@@ -1,7 +1,8 @@
 'use strict'
 import { Container, Text, View } from 'native-base'
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
+import Carousel from 'react-native-looped-carousel'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -14,11 +15,20 @@ class LoginScreen extends Component {
         return (
             <Container style={styles.mainContainer}>
                 <View scrollEnabled={false} style={styles.content}>
-                    <View style={styles.logo}>
-                        <Text>
-                            Carousel
-                        </Text>
-                    </View>
+                    <Carousel
+                        style={styles.carousel}
+                        autoplay={false}
+                        bullets>
+                        <Image 
+                            style={styles.carouselImage}
+                            source={require("app/resources/sample1.jpg")} />
+                        <Image 
+                            style={styles.carouselImage}
+                            source={require("app/resources/sample2.jpg")} />
+                        <Image 
+                            style={styles.carouselImage}
+                            source={require("app/resources/sample3.jpg")} />
+                    </Carousel>
                     <Icon.Button 
                         name='facebook'
                         backgroundColor='#3b5998'
@@ -54,12 +64,16 @@ const styles = StyleSheet.create({
         margin: 30
     },
 
-    logo: {
+    carousel: {
         flex: 1,
-        backgroundColor: '#F6F7F8',
-        justifyContent: 'center',
-        alignItems: 'center',
         marginBottom: 20
+    },
+
+    carouselImage: {
+        flex:1,
+        height: null,
+        width: null,
+        resizeMode:'stretch'
     }
 
 })
