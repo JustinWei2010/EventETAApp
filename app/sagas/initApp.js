@@ -10,8 +10,10 @@ function* _initFBLogin() {
     const fbToken = yield call(fbAPI.getFbToken)
     if (fbToken) {
         try {
-            yield call(facebook.fetchFBProfile)
-            yield call(facebook.fetchFBEvents)
+            yield [
+                call(facebook.fetchFBProfile),
+                call(facebook.fetchFBEvents)
+            ]
             yield put(navigation.navigateTo(constants.SCREEN.HOME))
             return
         } catch (error) {
@@ -19,6 +21,7 @@ function* _initFBLogin() {
             console.log(error)
         }
     }
+    
     //Navigate to login screen if not logged in our failure getting fbProfile
     yield put(navigation.navigateTo(constants.SCREEN.LOGIN))
 }

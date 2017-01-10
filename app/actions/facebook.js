@@ -29,7 +29,7 @@ export const fbRefreshProfile = (name, src) => {
 
 export const fbFetchEvents = () => {
     return {
-        type: type.FB_FETCH_EVENTS
+        type: types.FB_FETCH_EVENTS
     }
 }
 

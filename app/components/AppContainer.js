@@ -4,13 +4,11 @@ import React, { Component } from 'react'
 import { BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Drawer from 'react-native-drawer'
+import SideBarContainer from 'app/components/SideBarContainer'
 import EventDetailsScreen from 'app/screens/EventDetailsScreen'
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
-import SideBar from 'app/components/SideBar'
 import * as constants from 'app/constants'
-import * as drawer from 'app/actions/drawer'
 import * as navigation from 'app/actions/navigation'
 
 class AppContainer extends Component {
@@ -18,28 +16,17 @@ class AppContainer extends Component {
     componentDidMount() {
         //Mount Callback for popping history when back button is pressed on android
         BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)   
-
-        //Init global drawer to be used by drawer actions
-        drawer.initDrawer(this._drawer)
     }
 
     componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction);
-        drawer.clearDrawer(this._drawer)
     }
 
     render() {
         return (
-            <Drawer
-                ref={(ref) => {this._drawer=ref}}
-                type="static"
-                content={
-                    <SideBar />
-                }
-                tapToClose={true}
-                openDrawerOffset={100}>
+            <SideBarContainer>
                 { this._renderScreen() }
-            </Drawer>
+            </SideBarContainer>
         )
     }
 
