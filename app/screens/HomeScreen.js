@@ -11,7 +11,7 @@ class HomeScreen extends Component {
     constructor(props) {
         super(props)
         //Fetch fb user events if they don't exist
-        if(!props.events) {
+        if(!props.events || props.events.length === 0) {
             props.actions.fbFetchEvents()
         }
     }
