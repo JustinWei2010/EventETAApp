@@ -1,10 +1,13 @@
 'use strict'
+import { Container } from 'native-base'
 import React, { Component } from 'react'
 import { BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Drawer from 'react-native-drawer'
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
+import SideBar from 'app/components/SideBar'
 import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
 
@@ -12,7 +15,7 @@ class AppContainer extends Component {
 
     componentDidMount() {
         //Mount Callback for popping history when back button is pressed on android
-        BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)    
+        BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)   
     }
 
     componentWillUnmount() {
@@ -21,7 +24,17 @@ class AppContainer extends Component {
 
     render() {
         return (
-            this._renderScreen()
+            <Drawer
+                ref={(ref) => {this._drawer=ref}}
+                type="static"
+                content={
+                    <SideBar 
+                        closeDrawer={this._closeDrawer} />
+                }
+                tapToClose={true}
+                openDrawerOffset={100}>
+                { this._renderScreen() }
+            </Drawer>
         )
     }
 
@@ -34,12 +47,23 @@ class AppContainer extends Component {
                 
             case constants.SCREEN.HOME:
                 return (
-                    <HomeScreen />
+                    <HomeScreen 
+                        openDrawer={this._openDrawer} />
                 )
 
             default:
-                return null
+                return (
+                    <Container style={{ backgroundColor: 'white' }} />
+                )
         }
+    }
+
+    _openDrawer = () => {
+        this._drawer.open()
+    }
+
+    _closeDrawer = () => {
+        this._drawer.close()
     }
 
     _handleBackAction = () => {

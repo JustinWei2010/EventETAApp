@@ -13,9 +13,10 @@ export const fbLogout = () => {
     }
 }
 
-export const fbRefreshProfile = (name) => {
+export const fbRefreshProfile = (name, src) => {
     return {
         type: types.FB_REFRESH_PROFILE,
-        name: name
+        name: name,
+        src: src
     }
 }

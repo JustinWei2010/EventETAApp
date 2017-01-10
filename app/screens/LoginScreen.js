@@ -6,14 +6,13 @@ import Carousel from 'react-native-looped-carousel'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as constants from 'app/constants'
 import * as facebook from 'app/actions/facebook'
 
 class LoginScreen extends Component {
 
     render() {
         return (
-            <Container style={styles.mainContainer}>
+            <Container style={styles.container}>
                 <View scrollEnabled={false} style={styles.content}>
                     <Carousel
                         style={styles.carousel}
@@ -55,7 +54,7 @@ export default connect(state => ({
 
 const styles = StyleSheet.create({
 
-    mainContainer: {
+    container: {
         backgroundColor: 'white'
     },
 

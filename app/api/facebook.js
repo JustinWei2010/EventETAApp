@@ -34,7 +34,7 @@ export const getUserProfile = () => {
             '/me', {
                 parameters: {
                     fields: {
-                        string: 'id,name',
+                        string: 'id,name,picture.width(100).height(100)',
                     },
                 },
             },

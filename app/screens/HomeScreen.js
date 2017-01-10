@@ -1,39 +1,35 @@
 'use strict'
-import { Button, Container, Content, Header, Text, Title } from 'native-base'
+import { Button, Container, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as facebook from 'app/actions/facebook'
-import * as navigation from 'app/actions/navigation'
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
 
     render() {
         return (
-            <Container>
+            <Container style={styles.container}>
                 <Header>
+                    <Button transparent onPress={this._onClickMenuButton}>
+                        <Icon name='ios-menu' />
+                    </Button>
                     <Title>ETA</Title>
                 </Header>
-                <Content>                  
-                    <Text>Hi, {this.props.name}</Text>
-                    <Button onPress={this._onClickLogoutButton}>
-                        Logout!
-                    </Button>
-                </Content>
             </Container>
         )
     }
 
-    _onClickLogoutButton = () => {
-        this.props.actions.fbLogout()
+    _onClickMenuButton = () => {
+        this.props.openDrawer()
     }
 
 }
 
-export default connect(state => ({
-        name: state.fbProfile.name 
-    }),
-    (dispatch) => ({
-        actions: bindActionCreators(...facebook , dispatch)
-    })
-)(HomeScreen)
+const styles = StyleSheet.create({
+
+    container: {
+        backgroundColor: 'white'
+    }
+
+})

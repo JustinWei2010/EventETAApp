@@ -45,7 +45,7 @@ function* _logout(action) {
 export function* fetchFBProfile() {
     try {
         const profile = yield call(fbAPI.getUserProfile)
-        yield put(facebook.fbRefreshProfile(profile.name))
+        yield put(facebook.fbRefreshProfile(profile.name, profile.picture.data.url))
     } catch (error) {
         //Let callee know there was an error
         throw new Error(error)

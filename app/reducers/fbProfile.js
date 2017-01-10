@@ -2,7 +2,8 @@
 import * as types from 'app/actions/types'
 
 const _initialState = {
-    name: 'Not Logged in'
+    name: 'Not Logged in',
+    src: require("app/resources/profile.png") 
 }
 
 const fbProfile = (state = _initialState, action = {}) => {
@@ -10,6 +11,9 @@ const fbProfile = (state = _initialState, action = {}) => {
         case types.FB_REFRESH_PROFILE:
             return {
                 name: action.name,
+                src: {
+                    uri: action.src
+                }
             }
 
         default:

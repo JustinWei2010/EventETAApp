@@ -10,7 +10,6 @@ const _initialState = {
 const navigation = (state = _initialState, action = {}) => {
     switch (action.type) {
         case types.NAVIGATE_TO:
-            console.log(state)
             return {
                 currentScreen: action.scene,
                 history: [...state.history, action.scene]
