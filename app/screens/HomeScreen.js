@@ -4,7 +4,9 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as constants from 'app/constants'
 import * as facebook from 'app/actions/facebook'
+import * as navigation from 'app/actions/navigation'
 
 class HomeScreen extends Component {
 
@@ -32,7 +34,7 @@ class HomeScreen extends Component {
                     </CardItem>
                     <Card dataArray={this.props.events}
                           renderRow={(event) =>
-                            <CardItem style={{flex:1}}>
+                            <CardItem style={{flex:1}} button onPress={() => this._onClickEvent(event.id)}>
                                 <Text>{event.name}</Text>
                                 <Text>{event.start_time}</Text>
                             </CardItem>}>
@@ -40,6 +42,13 @@ class HomeScreen extends Component {
                 </Content>
             </Container>
         )
+    }
+
+    _onClickEvent = (eventId) => {
+        const data = {
+            eventId: eventId
+        }
+        this.props.actions.navigateTo(constants.SCREEN.EVENT_DETAILS, data)
     }
 
     _onClickMenuButton = () => {
@@ -52,7 +61,7 @@ export default connect(state => ({
     events: state.events.list
     }),
     (dispatch) => ({
-        actions: bindActionCreators(facebook, dispatch)
+        actions: bindActionCreators({ ...facebook, ...navigation }, dispatch)
     })
 )(HomeScreen)
 

@@ -5,6 +5,7 @@ import { BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Drawer from 'react-native-drawer'
+import EventDetailsScreen from 'app/screens/EventDetailsScreen'
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
 import SideBar from 'app/components/SideBar'
@@ -39,16 +40,23 @@ class AppContainer extends Component {
     }
 
     _renderScreen = () => {
-        switch(this.props.currentScreen) {
+        switch(this.props.currentScreen.name) {
+            case constants.SCREEN.EVENT_DETAILS:
+                return (
+                    <EventDetailsScreen 
+                        data={this.props.currentScreen.data}/>
+                )
+
+            case constants.SCREEN.HOME:
+                return (
+                    //Maybe just move drawer to HomeScreen?
+                    <HomeScreen 
+                        openDrawer={this._openDrawer} />
+                )
+
             case constants.SCREEN.LOGIN:
                 return (
                     <LoginScreen />
-                )
-                
-            case constants.SCREEN.HOME:
-                return (
-                    <HomeScreen 
-                        openDrawer={this._openDrawer} />
                 )
 
             default:

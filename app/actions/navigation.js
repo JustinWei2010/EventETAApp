@@ -1,10 +1,13 @@
 'use strict'
 import * as types from 'app/actions/types'
 
-export const navigateTo = (scene) => {
+export const navigateTo = (name, data) => {
     return {
         type: types.NAVIGATE_TO,
-        scene: scene
+        screen: {
+            name: name,
+            data: data
+        }
     }
 }
 

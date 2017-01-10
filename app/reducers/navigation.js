@@ -3,7 +3,7 @@ import * as constants from 'app/constants'
 import * as types from 'app/actions/types'
 
 const _initialState = {
-    currentScreen: null,
+    currentScreen: {},
     history: []
 }
 
@@ -11,8 +11,8 @@ const navigation = (state = _initialState, action = {}) => {
     switch (action.type) {
         case types.NAVIGATE_TO:
             return {
-                currentScreen: action.scene,
-                history: [...state.history, action.scene]
+                currentScreen: action.screen,
+                history: [...state.history, action.screen]
             }
 
         case types.NAVIGATE_BACK:
