@@ -1,5 +1,5 @@
 'use strict'
-import { Button, Container, Content, Header, Icon, Text, Title } from 'native-base'
+import { Button, Container, Content, Header, Text, Title } from 'native-base'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,9 +12,6 @@ class HomeScreen extends Component {
         return (
             <Container>
                 <Header>
-                    <Button transparent onPress={this._onClickBackButton}>
-                        <Icon name='ios-arrow-back' />
-                    </Button>
                     <Title>ETA</Title>
                 </Header>
                 <Content>                  
@@ -27,10 +24,6 @@ class HomeScreen extends Component {
         )
     }
 
-    _onClickBackButton = () => {
-        this.props.actions.navigateBack()
-    }
-
     _onClickLogoutButton = () => {
         this.props.actions.fbLogout()
     }
@@ -41,6 +34,6 @@ export default connect(state => ({
         name: state.fbProfile.name 
     }),
     (dispatch) => ({
-        actions: bindActionCreators({ ...facebook, ...navigation }, dispatch)
+        actions: bindActionCreators(...facebook , dispatch)
     })
 )(HomeScreen)
