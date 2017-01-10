@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as constants from 'app/constants'
+import * as drawer from 'app/actions/drawer'
 import * as facebook from 'app/actions/facebook'
 import * as navigation from 'app/actions/navigation'
 
@@ -52,7 +53,7 @@ class HomeScreen extends Component {
     }
 
     _onClickMenuButton = () => {
-        this.props.openDrawer()
+        drawer.openDrawer()
     }
 
 }

@@ -10,6 +10,7 @@ import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
 import SideBar from 'app/components/SideBar'
 import * as constants from 'app/constants'
+import * as drawer from 'app/actions/drawer'
 import * as navigation from 'app/actions/navigation'
 
 class AppContainer extends Component {
@@ -17,10 +18,14 @@ class AppContainer extends Component {
     componentDidMount() {
         //Mount Callback for popping history when back button is pressed on android
         BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)   
+
+        //Init global drawer to be used by drawer actions
+        drawer.initDrawer(this._drawer)
     }
 
     componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction);
+        drawer.clearDrawer(this._drawer)
     }
 
     render() {
@@ -29,8 +34,7 @@ class AppContainer extends Component {
                 ref={(ref) => {this._drawer=ref}}
                 type="static"
                 content={
-                    <SideBar 
-                        closeDrawer={this._closeDrawer} />
+                    <SideBar />
                 }
                 tapToClose={true}
                 openDrawerOffset={100}>
@@ -49,9 +53,7 @@ class AppContainer extends Component {
 
             case constants.SCREEN.HOME:
                 return (
-                    //Maybe just move drawer to HomeScreen?
-                    <HomeScreen 
-                        openDrawer={this._openDrawer} />
+                    <HomeScreen />
                 )
 
             case constants.SCREEN.LOGIN:
@@ -64,14 +66,6 @@ class AppContainer extends Component {
                     <Container style={{ backgroundColor: 'white' }} />
                 )
         }
-    }
-
-    _openDrawer = () => {
-        this._drawer.open()
-    }
-
-    _closeDrawer = () => {
-        this._drawer.close()
     }
 
     _handleBackAction = () => {

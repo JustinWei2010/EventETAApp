@@ -5,6 +5,7 @@ import { Platform, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as constants from 'app/constants'
+import * as drawer from 'app/actions/drawer'
 import * as facebook from 'app/actions/facebook'
 
 class SideBar extends Component {
@@ -44,7 +45,7 @@ class SideBar extends Component {
     }
 
     _onClickLogoutButton = () => {
-        this.props.closeDrawer()
+        drawer.closeDrawer()
         this.props.actions.fbLogout()
     }
 
