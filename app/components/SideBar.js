@@ -9,15 +9,23 @@ import * as facebook from 'app/actions/facebook'
 
 class SideBar extends Component {
 
+    constructor(props) {
+        super(props)
+        //Fetch fb profile if its fields don't exist
+        if(!props.profile) {
+            props.actions.fbFetchProfile()
+        }
+    }
+
     render() {
         return (
             <Content style={styles.sidebar}>
                 <View style={styles.profileContainer}>
                     <View style={styles.profileIcon}>
-                        <Thumbnail size={60} source={this.props.src} />
+                        <Thumbnail size={60} source={this.props.profile.src} />
                     </View>
                     <View style={styles.profileInfo}>
-                        <Text style={styles.profileName}>{this.props.name}</Text>
+                        <Text style={styles.profileName}>{this.props.profile.name}</Text>
                         <Text style={styles.profileViewEvents}>View info</Text>
                     </View>
                 </View>
@@ -43,8 +51,7 @@ class SideBar extends Component {
 }
 
 export default connect(state => ({
-    name: state.fbProfile.name,
-    src: state.fbProfile.src
+    profile: state.fbProfile,
     }),
     (dispatch) => ({
         actions: bindActionCreators(facebook, dispatch)

@@ -8,7 +8,7 @@ import * as navigation from 'app/actions/navigation'
 import * as types from 'app/actions/types'
 
 const _readPermissions = [
-
+    'user_events'
 ]
 
 function* _login(action) {
@@ -50,6 +50,24 @@ export function* fetchFBProfile() {
         //Let callee know there was an error
         throw new Error(error)
     }
+}
+
+export function* fetchFBEvents() {
+     try {
+        const events = yield call(fbAPI.getUserEvents)
+        yield put(facebook.fbRefreshEvents(events.data))
+    } catch (error) {
+        //Let callee know there was an error
+        throw new Error(error)
+    }   
+}
+
+export function* watchForFetchProfile() {
+    yield takeLatest(types.FB_FETCH_PROFILE, fetchFBProfile)
+}
+
+export function* watchForFetchEvents() {
+    yield takeLatest(types.FB_FETCH_EVENTS, fetchFBEvents)
 }
 
 export function* watchForLogin() {

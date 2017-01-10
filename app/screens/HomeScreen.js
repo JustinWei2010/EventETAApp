@@ -1,13 +1,23 @@
 'use strict'
-import { Button, Container, Header, Icon, Title } from 'native-base'
+import { Button, Card, CardItem, Container, Content, Header, Icon, Title, Text } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as facebook from 'app/actions/facebook'
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
+
+    constructor(props) {
+        super(props)
+        //Fetch fb user events if they don't exist
+        if(!props.events) {
+            props.actions.fbFetchEvents()
+        }
+    }
 
     render() {
+        console.log(this.props.events)
         return (
             <Container style={styles.container}>
                 <Header>
@@ -16,6 +26,18 @@ export default class HomeScreen extends Component {
                     </Button>
                     <Title>ETA</Title>
                 </Header>
+                <Content>
+                    <CardItem header>                        
+                        <Text>Events</Text>
+                    </CardItem>
+                    <Card dataArray={this.props.events}
+                          renderRow={(event) =>
+                            <CardItem style={{flex:1}}>
+                                <Text>{event.name}</Text>
+                                <Text>{event.start_time}</Text>
+                            </CardItem>}>
+                    </Card>
+                </Content>
             </Container>
         )
     }
@@ -25,6 +47,14 @@ export default class HomeScreen extends Component {
     }
 
 }
+
+export default connect(state => ({
+    events: state.events.list
+    }),
+    (dispatch) => ({
+        actions: bindActionCreators(facebook, dispatch)
+    })
+)(HomeScreen)
 
 const styles = StyleSheet.create({
 

@@ -13,10 +13,29 @@ export const fbLogout = () => {
     }
 }
 
+export const fbFetchProfile = () => {
+    return {
+        type: types.FB_FETCH_PROFILE
+    }
+}
+
 export const fbRefreshProfile = (name, src) => {
     return {
         type: types.FB_REFRESH_PROFILE,
         name: name,
         src: src
+    }
+}
+
+export const fbFetchEvents = () => {
+    return {
+        type: type.FB_FETCH_EVENTS
+    }
+}
+
+export const fbRefreshEvents = (events) => {
+    return {
+        type: types.FB_REFRESH_EVENTS,
+        events: events
     }
 }

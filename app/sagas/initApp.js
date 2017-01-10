@@ -11,10 +11,11 @@ function* _initFBLogin() {
     if (fbToken) {
         try {
             yield call(facebook.fetchFBProfile)
+            yield call(facebook.fetchFBEvents)
             yield put(navigation.navigateTo(constants.SCREEN.HOME))
             return
         } catch (error) {
-            console.log("Error while fetching facebook profile")
+            console.log("Error while fetching facebook user profile or events")
             console.log(error)
         }
     }

@@ -44,3 +44,32 @@ export const getUserProfile = () => {
         new GraphRequestManager().addRequest(userProfileRequest).start();
     })
 }
+
+export const getUserEvents = () => {
+    return new Promise((resolve, reject) => {
+        const responseCallback = (error, result) => {
+            if (error) {
+                console.log(error)
+                reject(error)
+            } else {
+                resolve(result)
+            }
+        }
+
+        const userEventsRequest = new GraphRequest(
+            '/me/events', {
+                parameters: {
+                    fields: {
+                        string: 'id,name,start_time,place',
+                    },
+                    access_token: {
+                        string: getFbToken().toString()
+                    },
+                },
+            },
+            responseCallback
+        )
+
+        new GraphRequestManager().addRequest(userEventsRequest).start();
+    })
+}
