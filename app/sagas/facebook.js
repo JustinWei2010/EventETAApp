@@ -8,7 +8,7 @@ import * as navigation from 'app/actions/navigation'
 import * as types from 'app/actions/types'
 
 const _readPermissions = [
-    'user_events'
+    constants.FACEBOOK_PERMISSIONS.USER_EVENTS
 ]
 
 function* _login(action) {

@@ -1,10 +1,11 @@
 'use strict'
 import { AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
+import * as constants from 'app/constants'
 
 export const login = async(readPermissions) => {
     const response = await LoginManager.logInWithReadPermissions(readPermissions)
     if (response.isCancelled) {
-        throw new Error('Login cancelled');
+        console.log("Login cancelled")
     } else if (await response.deniedPermissions) {
         console.log("Missing permissions: " + response.deniedPermissions)
         throw new Error('We need the requested permissions')
@@ -19,7 +20,7 @@ export const getFbToken = () => {
     return AccessToken.getCurrentAccessToken()
 }
 
-export const getUserProfile = () => {
+const _makeGraphRequest = (path, parameters) => {
     return new Promise((resolve, reject) => {
         const responseCallback = (error, result) => {
             if (error) {
@@ -30,46 +31,29 @@ export const getUserProfile = () => {
             }
         }
 
-        const userProfileRequest = new GraphRequest(
-            '/me', {
+        const request = new GraphRequest(
+            path, {
                 parameters: {
                     fields: {
-                        string: 'id,name,picture.width(100).height(100)',
+                        string: parameters,
                     },
                 },
             },
             responseCallback
         )
 
-        new GraphRequestManager().addRequest(userProfileRequest).start();
+        new GraphRequestManager().addRequest(request).start();
     })
 }
 
+export const getUserProfile = () => {
+    const path = constants.FACEBOOK_GRAPH.MY_PROFILE
+    const parameters = 'id,name,picture.width(100).height(100)'
+    return _makeGraphRequest(path, parameters)
+}
+
 export const getUserEvents = () => {
-    return new Promise((resolve, reject) => {
-        const responseCallback = (error, result) => {
-            if (error) {
-                console.log(error)
-                reject(error)
-            } else {
-                resolve(result)
-            }
-        }
-
-        const userEventsRequest = new GraphRequest(
-            '/me/events', {
-                parameters: {
-                    fields: {
-                        string: 'id,name,start_time,place',
-                    },
-                    access_token: {
-                        string: getFbToken().toString()
-                    },
-                },
-            },
-            responseCallback
-        )
-
-        new GraphRequestManager().addRequest(userEventsRequest).start();
-    })
+    const path = constants.FACEBOOK_GRAPH.MY_EVENTS
+    const parameters = 'id,name,start_time,place'
+    return _makeGraphRequest(path, parameters)
 }
