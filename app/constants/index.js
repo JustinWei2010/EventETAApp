@@ -8,7 +8,8 @@ export const FACEBOOK_GRAPH = {
 
 //Facebook Permissions
 export const FACEBOOK_PERMISSIONS = {
-    USER_EVENTS: 'user_events'
+    USER_EVENTS: 'user_events',
+    USER_EMAIL: 'email'
 }
 
 //App screen names

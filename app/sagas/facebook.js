@@ -6,9 +6,11 @@ import * as facebook from 'app/actions/facebook'
 import * as fbAPI from 'app/api/facebook'
 import * as navigation from 'app/actions/navigation'
 import * as types from 'app/actions/types'
+import * as firebase from 'app/api/firebase'
 
 const _readPermissions = [
-    constants.FACEBOOK_PERMISSIONS.USER_EVENTS
+    constants.FACEBOOK_PERMISSIONS.USER_EVENTS,
+    constants.FACEBOOK_PERMISSIONS.USER_EMAIL
 ]
 
 function* _login(action) {
@@ -23,6 +25,7 @@ function* _login(action) {
     //Treat defined token as login success
     if (token) {
         try {
+            yield call(firebase.loginWithFacebookUser, token)
             yield call(fetchFBProfile)
             //Only navigate to home if profile fetch is successful
             yield put(navigation.navigateTo(constants.SCREEN.HOME))
