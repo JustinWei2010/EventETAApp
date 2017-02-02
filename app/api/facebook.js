@@ -54,6 +54,6 @@ export const getUserProfile = () => {
 
 export const getUserEvents = () => {
     const path = constants.FACEBOOK_GRAPH.MY_EVENTS
-    const parameters = 'id,name,start_time,place'
+    const parameters = 'id,name,start_time,place,cover,source'
     return _makeGraphRequest(path, parameters)
 }
