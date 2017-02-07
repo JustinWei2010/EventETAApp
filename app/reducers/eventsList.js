@@ -2,14 +2,14 @@
 import * as types from 'app/actions/types'
 
 const _initialState = {
-    list: []
+    events: []
 }
 
-const events = (state = _initialState, action = {}) => {
+const eventsList = (state = _initialState, action = {}) => {
     switch (action.type) {
         case types.FB_REFRESH_EVENTS:
             return {
-                list: action.events
+                events: action.events
             }
 
         default:
@@ -17,4 +17,4 @@ const events = (state = _initialState, action = {}) => {
     }
 }
 
-export default events
+export default eventsList

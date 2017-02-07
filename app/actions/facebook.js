@@ -39,3 +39,18 @@ export const fbRefreshEvents = (events) => {
         events: events
     }
 }
+
+export const fbFetchUsersAttendingEvent = (eventId) => {
+    return {
+        type: types.FB_FETCH_USERS_ATTENDING_EVENT,
+        eventId: eventId
+    }
+}
+
+export const fbRefreshUsersAttendingEvent = (attendees) => {
+    return {
+        type: types.FB_REFRESH_USERS_ATTENDING_EVENT,
+        attendees: attendees
+    }
+}
+

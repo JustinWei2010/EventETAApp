@@ -6,7 +6,7 @@ import * as types from 'app/actions/types'
 import * as firebaseApi from 'app/api/firebase'
 
 function* _updateEventETA(action) {
-    console.log(`Update Event ETA saga: ${action.details}`)
+    console.log("Update Event ETA saga: ")
     try {
         yield call(firebaseApi.updateEventEta, action.details.event, action.details.eta)
     } catch (error) {

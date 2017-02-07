@@ -1,11 +1,5 @@
 'use strict'
 
-//Facebook Graph API 
-export const FACEBOOK_GRAPH = {
-    MY_PROFILE: '/me',
-    MY_EVENTS: '/me/events'
-}
-
 //Facebook Permissions
 export const FACEBOOK_PERMISSIONS = {
     USER_EVENTS: 'user_events',

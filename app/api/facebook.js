@@ -1,6 +1,5 @@
 'use strict'
 import { AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
-import * as constants from 'app/constants'
 
 export const login = async(readPermissions) => {
     const response = await LoginManager.logInWithReadPermissions(readPermissions)
@@ -46,14 +45,21 @@ const _makeGraphRequest = (path, parameters) => {
     })
 }
 
-export const getUserProfile = () => {
-    const path = constants.FACEBOOK_GRAPH.MY_PROFILE
+export const getMyProfile = () => {
+    const path = '/me'
     const parameters = 'id,name,picture.width(100).height(100)'
     return _makeGraphRequest(path, parameters)
 }
 
-export const getUserEvents = () => {
-    const path = constants.FACEBOOK_GRAPH.MY_EVENTS
-    const parameters = 'id,name,start_time,place,cover,source'
+export const getMyEvents = () => {
+    const path = '/me/events'
+    const parameters = 'id,name,cover,description,start_time,attending_count,place,source'
+    return _makeGraphRequest(path, parameters)
+}
+
+//TODO: Need to add offset for pagination/infinite scrolling
+export const getUsersAttendingEvent = (eventId) => {
+    const path = '/' + eventId + '/attending'
+    const parameters = 'name,picture.width(100).height(100)'
     return _makeGraphRequest(path, parameters)
 }

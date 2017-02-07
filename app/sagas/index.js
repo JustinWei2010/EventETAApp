@@ -6,6 +6,7 @@ export default function* rootSaga() {
     yield [
         facebook.watchForFetchEvents(),
         facebook.watchForFetchProfile(),
+        facebook.watchForFetchUsersAttendingEvent(),
         facebook.watchForLogin(),
         facebook.watchForLogout(),
         events.watchForUpdateEventETA()

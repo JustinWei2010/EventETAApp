@@ -8,7 +8,6 @@ import dateformat from 'dateformat'
 import homeTheme from 'app/themes/homeTheme'
 import * as constants from 'app/constants'
 import * as drawer from 'app/actions/drawer'
-import * as facebook from 'app/actions/facebook'
 import * as navigation from 'app/actions/navigation'
 import EventList from 'app/components/EventList'
 
@@ -20,30 +19,28 @@ class HomeScreen extends Component {
         if(!props.events || props.events.length === 0) {
             props.actions.fbFetchEvents()
         }
-        //this.todayEnvets = fuction();
     }
 
+    //Adding all events for easy testing
     render() {
         console.log(this.props.events);
         return (
             <Container style={styles.container}>
                 <Header>
-                    <Button transparent>
-                        <Icon name='ios-arrow-back' style={{color: 'transparent'}}/>
-                    </Button>
-
-                    <Title>ETA</Title>
-
                     <Button transparent onPress={this._onClickMenuButton}>
                         <Icon name='ios-menu' />
-                    </Button>       
+                    </Button>      
+                    <Title>ETA</Title>
                 </Header>
                 <Content>
                     <EventList title="Current events"
                             events={this.getCurrentEvents(this.props.events)} />
 
-                    <EventList title="Current events"
+                    <EventList title="Upcoming events"
                             events={this.getUpcomingEvents(this.props.events)} />
+
+                    <EventList title="Test All Events"
+                            events={this.props.events} />
                 </Content>
             </Container>
         )
@@ -98,10 +95,10 @@ class HomeScreen extends Component {
 }
 
 export default connect(state => ({
-    events: state.events.list
+    events: state.eventsList.events
     }),
     (dispatch) => ({
-        actions: bindActionCreators({ ...facebook, ...navigation }, dispatch)
+        actions: bindActionCreators(navigation, dispatch)
     })
 )(HomeScreen)
 
@@ -109,12 +106,6 @@ const styles = StyleSheet.create({
 
     container: {
         backgroundColor: 'white'
-    },
-
-    header: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center'
     }
 
 })

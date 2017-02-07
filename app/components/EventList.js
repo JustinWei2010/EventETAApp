@@ -11,11 +11,9 @@ import * as drawer from 'app/actions/drawer'
 import * as facebook from 'app/actions/facebook'
 import * as navigation from 'app/actions/navigation'
 
-
 class EventList extends Component {
 	
 	render() { 
-		console.log("HERE");
 		return (
 			<Card theme={homeTheme}>
                 <CardItem header>                        
@@ -30,7 +28,7 @@ class EventList extends Component {
 
 	_renderEvent = (event) => {
         return (
-            <ListItem style={{flex:1}} button onPress={() => this._onClickEvent(event.id)}>
+            <ListItem style={{flex:1}} button onPress={() => this._onClickEvent(event)}>
                 <Thumbnail square size={100} source={{uri: this.getCoverPhotoSource(event)}} />
                 <Text>{event.name}</Text>
                 <Text note>When: {this.formatDateString(event.start_time)}</Text>
@@ -58,9 +56,19 @@ class EventList extends Component {
         return dateformat(new Date(eventStartTime), "ddd, mmm dS @ h:MM TT");
     }
 
-    _onClickEvent = (eventId) => {
+    _onClickEvent = (event) => {
+        console.log("here3")
+        console.log(event)
         const data = {
-            eventId: eventId
+            event: {
+                id: event.id,
+                name: event.name,
+                place: event.place ? event.place.name : '',
+                startTime: event.start_time,
+                description: event.description,
+                attendingCount: event.attending_count,
+                source: event.cover ? { uri: event.cover.source } : require("app/resources/eventCover.jpg")
+            }
         }
         this.props.actions.navigateTo(constants.SCREEN.EVENT_DETAILS, data)
     }
