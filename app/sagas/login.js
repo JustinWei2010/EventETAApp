@@ -2,7 +2,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import * as constants from 'app/constants'
 import * as events from 'app/sagas/events'
-import * as fbAPI from 'app/api/facebook'
+import * as facebook from 'app/api/facebook'
 import * as firebase from 'app/api/firebase'
 import * as navigation from 'app/actions/navigation'
 import * as profile from 'app/sagas/profile'
@@ -15,13 +15,13 @@ const _readPermissions = [
 
 function* _login(action) {
     try {
-        yield call(fbAPI.login, _readPermissions)
+        yield call(facebook.login, _readPermissions)
     } catch (error) {
         console.log("Error during login process")
         console.log(error)
     }
 
-    const token = yield call(fbAPI.getFbToken)
+    const token = yield call(facebook.getFbToken)
     //Treat defined token as login success
     if (token) {
         try {
@@ -43,7 +43,7 @@ function* _logout(action) {
     //Clear history since user is not authenticated anymore
     yield put(navigation.clearHistory())
     yield [
-        call(fbAPI.logout),
+        call(facebook.logout),
         put(navigation.navigateTo(constants.SCREEN.LOGIN))
     ]
 }

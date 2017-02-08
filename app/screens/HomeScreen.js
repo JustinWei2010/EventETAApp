@@ -2,7 +2,7 @@
 import moment from 'moment'
 import { Button, Container, Content, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import EventList from 'app/components/EventList'
 import * as drawer from 'app/actions/drawer'

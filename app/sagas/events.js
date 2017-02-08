@@ -1,24 +1,24 @@
 'use strict'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import * as events from 'app/actions/events'
+import * as facebook from 'app/api/facebook'
+import * as firebase from 'app/api/firebase'
 import * as types from 'app/actions/types'
-import * as facebook from 'app/actions/facebook'
-import * as fbAPI from 'app/api/facebook'
-import * as firebaseApi from 'app/api/firebase'
 
 function* _updateEventETA(action) {
     console.log("Update Event ETA saga: ")
     try {
-        yield call(firebaseApi.updateEventEta, action.details.event, action.details.eta)
+        yield call(firebase.updateEventEta, action.details.event, action.details.eta)
     } catch (error) {
         console.log("Error when updating event eta.")
         console.log(error)
     }
 }
 
-function* _fetchFBUsersAttendingEvent(action) {
+function* _fetchUsersAttendingFBEvent(action) {
       try {
-        const attendees = yield call(fbAPI.getUsersAttendingEvent, action.eventId)
-        yield put(facebook.fbRefreshUsersAttendingEvent(attendees.data))
+        const attendees = yield call(facebook.getUsersAttendingEvent, action.eventId)
+        yield put(events.refreshUsersAttendingFBEvent(attendees.data))
     } catch (error) {
         //Fix bug here when error during takeEvery
         throw new Error(error)
@@ -27,8 +27,8 @@ function* _fetchFBUsersAttendingEvent(action) {
 
 export function* fetchFBEvents(action) {
      try {
-        const events = yield call(fbAPI.getMyEvents)
-        yield put(facebook.fbRefreshEvents(events.data))
+        const fbEvents = yield call(facebook.getMyEvents)
+        yield put(events.refreshFBEvents(fbEvents.data))
     } catch (error) {
         //Fix bug here when error during takeLatest
         throw new Error(error)
@@ -36,7 +36,7 @@ export function* fetchFBEvents(action) {
 }
 
 export function* watchForFetchFBEvents() {
-    yield takeLatest(types.FB_FETCH_EVENTS, fetchFBEvents)
+    yield takeLatest(types.FETCH_FB_EVENTS, fetchFBEvents)
 }
 
 export function* watchForUpdateEventETA() {
@@ -44,5 +44,5 @@ export function* watchForUpdateEventETA() {
 }
 
 export function* watchForFetchUsersAttendingFBEvent() {
-    yield takeEvery(types.FB_FETCH_USERS_ATTENDING_EVENT, _fetchFBUsersAttendingEvent)
+    yield takeEvery(types.FETCH_USERS_ATTENDING_FB_EVENT, _fetchUsersAttendingFBEvent)
 }

@@ -1,20 +1,19 @@
 'use strict'
-import { Button, Container, Content, Footer, Header, Icon, List, ListItem, Thumbnail, Text, Title, View } from 'native-base'
+import { Button, Container, Content, Footer, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import EventETAList from 'app/components/EventETAList'
 import EventDetails from 'app/components/EventDetails'
-import * as facebook from 'app/actions/facebook'
+import EventETAList from 'app/components/EventETAList'
+import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
-import * as events from 'app/actions/event'
 
 class EventDetailsScreen extends Component {
 
     constructor(props) {
         super(props)
-        this.props.actions.fbFetchUsersAttendingEvent(props.data.event.id)
+        this.props.actions.fetchUsersAttendingFBEvent(props.data.event.id)
     }
 
     render() {
@@ -63,7 +62,7 @@ class EventDetailsScreen extends Component {
 export default connect(state => ({
     }),
     (dispatch) => ({
-        actions: bindActionCreators({ ...facebook, ...navigation, ...events }, dispatch)
+        actions: bindActionCreators({ ...events, ...navigation }, dispatch)
     })
 )(EventDetailsScreen)
 

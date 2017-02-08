@@ -9,7 +9,7 @@ const _initialState = {
 
 const profile = (state = _initialState, action = {}) => {
     switch (action.type) {
-        case types.FB_REFRESH_PROFILE:
+        case types.REFRESH_FB_PROFILE:
             return {
                 name: action.name,
                 src: {

@@ -6,7 +6,7 @@ import Carousel from 'react-native-looped-carousel'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as facebook from 'app/actions/facebook'
+import * as login from 'app/actions/login'
 
 class LoginScreen extends Component {
 
@@ -48,7 +48,7 @@ class LoginScreen extends Component {
 export default connect(state => ({
     }),
     (dispatch) => ({
-        actions: bindActionCreators(facebook, dispatch)
+        actions: bindActionCreators(login, dispatch)
     })
 )(LoginScreen)
 

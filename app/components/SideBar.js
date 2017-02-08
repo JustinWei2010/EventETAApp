@@ -6,13 +6,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as constants from 'app/constants'
 import * as drawer from 'app/actions/drawer'
-import * as facebook from 'app/actions/facebook'
+import * as login from 'app/actions/login'
 
 class SideBar extends Component {
-
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
@@ -51,7 +47,7 @@ export default connect(state => ({
     profile: state.profile,
     }),
     (dispatch) => ({
-        actions: bindActionCreators(facebook, dispatch)
+        actions: bindActionCreators(login, dispatch)
     })
 )(SideBar)
 

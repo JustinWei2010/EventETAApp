@@ -7,10 +7,10 @@ const _initialState = {
 
 const eventETAList = (state = _initialState, action = {}) => {
     switch (action.type) {
-        case types.FB_FETCH_USERS_ATTENDING_EVENT:
+        case types.FETCH_USERS_ATTENDING_FB_EVENT:
             return _initialState
 
-        case types.FB_REFRESH_USERS_ATTENDING_EVENT:
+        case types.REFRESH_USERS_ATTENDING_FB_EVENT:
             return {
                 attendees: action.attendees
             }
