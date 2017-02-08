@@ -4,9 +4,10 @@ import { Button, Container, Content, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import EventList from 'app/components/EventList'
-import * as constants from 'app/constants'
 import * as drawer from 'app/actions/drawer'
+import * as facebook from 'app/actions/facebook'
 
 class HomeScreen extends Component {
 
@@ -21,7 +22,6 @@ class HomeScreen extends Component {
     //Adding all events for easy testing
     render() {
         const filteredEvents = this._filterEventsByDay(this.props.events)
-        console.log(filteredEvents);
         return (
             <Container style={styles.container}>
                 <Header>
@@ -60,9 +60,9 @@ class HomeScreen extends Component {
         events.forEach((event) => {
             const eventTime = moment(event.start_time)
             if (eventTime >= currentStart && eventTime <= currentEnd) {
-                filteredEvents.current.push(event);
+                filteredEvents.current.push(event)
             } else if (eventTime >= upcomingStart && eventTime <= upcomingEnd) {
-                filteredEvents.upcoming.push(event);
+                filteredEvents.upcoming.push(event)
             }
         })
 
@@ -79,6 +79,7 @@ export default connect(state => ({
     events: state.eventsList.events
     }),
     (dispatch) => ({
+        actions: bindActionCreators(facebook, dispatch)
     })
 )(HomeScreen)
 
