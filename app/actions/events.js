@@ -37,3 +37,12 @@ export const updateEventETA = (event, eta) => {
         }
     }
 }
+
+export const checkInEvent = (event) => {
+    return {
+        type: types.CHECK_IN_EVENT,
+        details: {
+            event: event
+        }
+    }
+}

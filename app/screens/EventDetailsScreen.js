@@ -54,7 +54,9 @@ class EventDetailsScreen extends Component {
     }
 
     _onClickCheckInButton = () => {
-
+        this.props.actions.checkInEvent(
+            {facebookEventId: this.props.data.event.id}
+        )
     }
 
 }

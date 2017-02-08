@@ -25,13 +25,13 @@ export const loginWithFacebookUser = (accessToken) => {
     })
 }
 
-export const updateEventEta = (event, eta) => {
+export const updateEventEta = (event, eta, hasArrived) => {
   if (event.facebookEventId) {
     const firebaseUserId = firebase.auth().currentUser.uid;
     const facebookUserId = firebase.auth().currentUser.providerData.find(
       provider => provider.providerId === "facebook.com").uid;
     console.log(`Updating ETA for firebaseUserId: ${firebaseUserId}, facebookUserId: ${facebookUserId}, event: ${event.facebookEventId}, eta: ${eta}`)
     firebase.database().ref(`/events/facebook/${event.facebookEventId}/etas/${firebaseUserId}`)
-            .set({ facebookUserId: facebookUserId, eta: eta.getTime(), hasArrived: false });
+            .set({ facebookUserId: facebookUserId, eta: eta.getTime(), hasArrived: hasArrived });
   }
 }

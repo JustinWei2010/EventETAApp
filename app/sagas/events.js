@@ -8,7 +8,14 @@ import * as types from 'app/actions/types'
 function* _updateEventETA(action) {
     console.log("Update Event ETA saga: ")
     try {
-        yield call(firebase.updateEventEta, action.details.event, action.details.eta)
+        switch(action.type) {
+            case types.UPDATE_EVENT_ETA:
+                yield call(firebase.updateEventEta, action.details.event, action.details.eta, false);
+                break;
+            case types.CHECK_IN_EVENT:
+                yield call(firebase.updateEventEta, action.details.event, new Date(), true);
+                break;
+        }
     } catch (error) {
         console.log("Error when updating event eta.")
         console.log(error)
@@ -41,6 +48,10 @@ export function* watchForFetchFBEvents() {
 
 export function* watchForUpdateEventETA() {
     yield takeLatest(types.UPDATE_EVENT_ETA, _updateEventETA)
+}
+
+export function* watchForCheckInEvent() {
+    yield takeLatest(types.CHECK_IN_EVENT, _updateEventETA)
 }
 
 export function* watchForFetchUsersAttendingFBEvent() {
