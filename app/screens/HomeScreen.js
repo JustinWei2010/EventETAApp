@@ -4,8 +4,8 @@ import { Button, Container, Content, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
+import { openDrawer } from 'app/actions/drawer'
 import EventList from 'app/components/EventList'
-import * as drawer from 'app/actions/drawer'
 
 class HomeScreen extends Component {
 
@@ -64,7 +64,7 @@ class HomeScreen extends Component {
     }
 
     _onClickMenuButton = () => {
-        drawer.openDrawer()
+        openDrawer()
     }
 
 }

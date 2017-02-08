@@ -1,11 +1,11 @@
 'use strict'
 import { call, put, takeLatest } from 'redux-saga/effects'
+import { clearHistory, navigateTo } from 'app/actions/navigation'
+import { fetchFBEvents } from 'app/sagas/events'
+import { fetchFBProfile } from 'app/sagas/profile'
 import * as constants from 'app/constants'
-import * as events from 'app/sagas/events'
 import * as facebook from 'app/api/facebook'
 import * as firebase from 'app/api/firebase'
-import * as navigation from 'app/actions/navigation'
-import * as profile from 'app/sagas/profile'
 import * as types from 'app/actions/types'
 
 const _readPermissions = [
@@ -21,31 +21,41 @@ function* _login(action) {
         console.log(error)
     }
 
-    const token = yield call(facebook.getFbToken)
-    //Treat defined token as login success
-    if (token) {
-        try {
-            yield call(firebase.loginWithFacebookUser, token)
-            yield [
-                call(profile.fetchFBProfile), 
-                call(events.fetchFBEvents)
-            ]
-            //Only navigate to home if initial fetch is successful
-            yield put(navigation.navigateTo(constants.SCREEN.HOME))
-        } catch(error) {
-            console.log("Error while fetching facebook profile")
-            console.log(error)
-        }
-    }
+    yield call(postLoginProcess)
 }
 
 function* _logout(action) {
     //Clear history since user is not authenticated anymore
-    yield put(navigation.clearHistory())
+    yield put(clearHistory())
     yield [
         call(facebook.logout),
-        put(navigation.navigateTo(constants.SCREEN.LOGIN))
+        put(navigateTo(constants.SCREEN.LOGIN))
     ]
+}
+
+//Load facebook login token and determine which screen to send user
+export function* postLoginProcess() {
+    const fbToken = yield call(facebook.getFbToken)
+    if (fbToken) {
+        try {
+            yield call(firebase.loginWithFacebookUser, fbToken)
+            yield [
+                call(fetchFBProfile),
+                call(fetchFBEvents)
+            ]
+            yield put(navigateTo(constants.SCREEN.HOME))
+            return
+        } catch (error) {
+            console.log("Error while fetching facebook user profile or events")
+            console.log(error)
+        }
+    } else {
+        console.log("Facebook token is null")
+    }
+    
+    //Navigate to login screen if not logged in or failure fetching needed fb data
+    yield put(clearHistory())
+    yield put(navigateTo(constants.SCREEN.LOGIN))
 }
 
 export function* watchForLogin() {
