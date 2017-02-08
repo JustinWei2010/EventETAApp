@@ -1,14 +1,15 @@
 'use strict'
-import * as facebook from 'app/sagas/facebook'
 import * as events from 'app/sagas/events'
+import * as login from 'app/sagas/login'
+import * as profile from 'app/sagas/profile'
 
 export default function* rootSaga() {
     yield [
-        facebook.watchForFetchEvents(),
-        facebook.watchForFetchProfile(),
-        facebook.watchForFetchUsersAttendingEvent(),
-        facebook.watchForLogin(),
-        facebook.watchForLogout(),
-        events.watchForUpdateEventETA()
+        events.watchForUpdateEventETA(),
+        events.watchForFetchFBEvents(),
+        events.watchForFetchUsersAttendingFBEvent(),
+        login.watchForLogin(),
+        login.watchForLogout(),
+        profile.watchForFetchFBProfile()
     ]
 }
