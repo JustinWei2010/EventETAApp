@@ -1,12 +1,13 @@
 'use strict'
+import * as constants from 'app/constants'
 import * as types from 'app/actions/types'
 
 const _initialState = {
     name: 'Not Logged in',
-    src: require("app/resources/profile.png") 
+    src: require('app/resources/profile.png') 
 }
 
-const fbProfile = (state = _initialState, action = {}) => {
+const profile = (state = _initialState, action = {}) => {
     switch (action.type) {
         case types.FB_REFRESH_PROFILE:
             return {
@@ -21,4 +22,4 @@ const fbProfile = (state = _initialState, action = {}) => {
     }
 }
 
-export default fbProfile
+export default profile

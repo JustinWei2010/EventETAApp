@@ -70,7 +70,7 @@ class HomeScreen extends Component {
 }
 
 export default connect(state => ({
-    events: state.eventsList.events
+    events: state.eventList
     }),
     (dispatch) => ({
     })

@@ -1,12 +1,12 @@
 'use strict'
 import eventETAList from 'app/reducers/eventETAList'
-import eventsList from 'app/reducers/eventsList'
-import fbProfile from 'app/reducers/fbProfile'
+import eventList from 'app/reducers/eventList'
 import navigation from 'app/reducers/navigation'
+import profile from 'app/reducers/profile'
 
 export {
     eventETAList,
-    eventsList,
-    fbProfile,
-    navigation
+    eventList,
+    navigation,
+    profile
 }

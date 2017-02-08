@@ -12,10 +12,6 @@ class SideBar extends Component {
 
     constructor(props) {
         super(props)
-        //Fetch fb profile if its fields don't exist
-        if(!props.profile) {
-            props.actions.fbFetchProfile()
-        }
     }
 
     render() {
@@ -52,7 +48,7 @@ class SideBar extends Component {
 }
 
 export default connect(state => ({
-    profile: state.fbProfile,
+    profile: state.profile,
     }),
     (dispatch) => ({
         actions: bindActionCreators(facebook, dispatch)

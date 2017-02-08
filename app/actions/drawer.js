@@ -13,9 +13,13 @@ export const clearDrawer = () => {
 }
 
 export const openDrawer = () => {
-    _drawer.open()
+    if (_drawer) {
+        _drawer.open()
+    }
 }
 
 export const closeDrawer = () => {
-    _drawer.close()
+    if (_drawer) {
+        _drawer.close()
+    }
 }
