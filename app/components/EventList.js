@@ -5,7 +5,7 @@ import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import dateformat from 'dateformat'
-import homeTheme from 'app/themes/homeTheme'
+import HomeTheme from 'app/themes/HomeTheme'
 import * as constants from 'app/constants'
 import * as drawer from 'app/actions/drawer'
 import * as facebook from 'app/actions/facebook'
@@ -15,7 +15,7 @@ class EventList extends Component {
 	
 	render() { 
 		return (
-			<Card theme={homeTheme}>
+			<Card theme={HomeTheme}>
                 <CardItem header>                        
                     <Text>{this.props.title}</Text>
                 </CardItem>
@@ -57,7 +57,6 @@ class EventList extends Component {
     }
 
     _onClickEvent = (event) => {
-        console.log("here3")
         console.log(event)
         const data = {
             event: {
