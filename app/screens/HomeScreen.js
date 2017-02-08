@@ -4,19 +4,13 @@ import { Button, Container, Content, Header, Icon, Title } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import EventList from 'app/components/EventList'
 import * as drawer from 'app/actions/drawer'
-import * as facebook from 'app/actions/facebook'
 
 class HomeScreen extends Component {
 
     constructor(props) {
         super(props)
-        //Fetch fb user events if they don't exist
-        if(!props.events || props.events.length === 0) {
-            props.actions.fbFetchEvents()
-        }
     }
 
     //Adding all events for easy testing
@@ -79,7 +73,6 @@ export default connect(state => ({
     events: state.eventsList.events
     }),
     (dispatch) => ({
-        actions: bindActionCreators(facebook, dispatch)
     })
 )(HomeScreen)
 

@@ -25,8 +25,11 @@ function* _login(action) {
     if (token) {
         try {
             yield call(firebase.loginWithFacebookUser, token)
-            yield call(fetchFBProfile)
-            //Only navigate to home if profile fetch is successful
+            yield [
+                call(fetchFBProfile), 
+                call(fetchFBEvents)
+            ]
+            //Only navigate to home if initial fetch is successful
             yield put(navigation.navigateTo(constants.SCREEN.HOME))
         } catch(error) {
             console.log("Error while fetching facebook profile")
