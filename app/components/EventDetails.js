@@ -3,10 +3,17 @@ import React, { Component } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { formatDate } from 'app/utils/dateFormatter'
 
+const COLLAPSED_DETAILS_HEIGHT = 200
+
 export default class EventDetails extends Component {
 
     constructor(props){
         super(props)
+        this.state = { 
+            initialRender: true,
+            detailsHeight: 0,
+            collapseDetails: false
+        }
     }
 
     render() {
@@ -17,18 +24,34 @@ export default class EventDetails extends Component {
                 </View>
                 
                 <View style={styles.detailsCollapsible}>
-                    <View style={styles.details}>
+                    <View onLayout={this._setDetailsHeight} style={this.state.collapseDetails ? styles.details : ''}>
                         <Text style={styles.title}>{this.props.event.name}</Text>
                         <Text style={styles.date}>{formatDate(this.props.event.startTime)}</Text>
                         {this._renderEventAttendingCount()}
                         {this._renderEventDescription()}   
                     </View>
-                    <TouchableOpacity onPress={this._onToggleShowDetails}>
-                        <Text style={styles.descriptionSeeMore}>See More</Text>
-                    </TouchableOpacity>    
+                        {this._renderShowMoreButton()}
                 </View> 
             </View>
         )
+    }
+
+    _onToggleCollapseDetails = () => {
+        this.setState({
+            collapseDetails: !this.state.collapseDetails 
+        })
+    }
+
+    _setDetailsHeight = (event) => {
+        const detailsHeight = event.nativeEvent.layout.height
+
+        if (this.state.initialRender) {
+            this.setState({
+                initialRender: false,
+                detailsHeight: detailsHeight,
+                collapseDetails: detailsHeight > COLLAPSED_DETAILS_HEIGHT
+            })
+        }
     }
 
     _renderEventAttendingCount = () => {
@@ -54,6 +77,18 @@ export default class EventDetails extends Component {
         }
     }
 
+    _renderShowMoreButton = () => {
+        if (this.state.detailsHeight > COLLAPSED_DETAILS_HEIGHT) {
+            const showDetailsText = this.state.showDetails ? "Show Less" : "See More"
+            return (
+                <TouchableOpacity onPress={this._onToggleCollapseDetails}>
+                    <Text style={styles.descriptionSeeMore}>{showDetailsText}</Text>
+                </TouchableOpacity>   
+            )
+        } else {
+            return null
+        }
+    }
 }
 
 const styles = StyleSheet.create({
