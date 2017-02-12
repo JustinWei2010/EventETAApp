@@ -1,6 +1,6 @@
 'use strict'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { refreshFBEvents, refreshUsersAttendingFBEvent } from 'app/actions/events'
+import { refreshFBEvents, refreshUsersAttendingFBEvent, refreshEventETAs } from 'app/actions/events'
 import * as facebook from 'app/api/facebook'
 import * as firebase from 'app/api/firebase'
 import * as types from 'app/actions/types'
@@ -52,6 +52,10 @@ export function* watchForUpdateEventETA() {
 
 export function* watchForCheckInEvent() {
     yield takeLatest(types.CHECK_IN_EVENT, _updateEventETA)
+}
+
+export function* watchForWaitForEventETAs() {
+    yield takeLatest(types.WAIT_FOR_EVENT_ETAS, _waitForEventETAs)
 }
 
 export function* watchForFetchUsersAttendingFBEvent() {

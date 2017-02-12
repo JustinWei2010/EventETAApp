@@ -28,6 +28,13 @@ export const refreshUsersAttendingFBEvent = (attendees) => {
     }
 }
 
+export const refreshEventETAs = (etas) => {
+    return {
+        type: types.REFRESH_EVENT_ETAS,
+        etas: etas
+    }
+}
+
 export const updateEventETA = (event, eta) => {
     return {
         type: types.UPDATE_EVENT_ETA,

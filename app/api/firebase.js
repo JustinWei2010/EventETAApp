@@ -35,3 +35,13 @@ export const updateEventEta = (event, eta, hasArrived) => {
             .set({ facebookUserId: facebookUserId, eta: eta.getTime(), hasArrived: hasArrived });
   }
 }
+
+export const waitForEventETAs = (event, callback) => {
+  if (event.facebookEventId) {
+    console.log(`Wait for event ETA for facebook event id ${event.facebookEventId}`)
+    firebase.database().ref(`/events/facebook/${event.facebookEventId}/etas`).on('value', snapshot => {
+      console.log(`ETAs for facebook id ${event.facebookEventId} updated!`)
+      callback(snapshot.val())
+    })
+  }
+}

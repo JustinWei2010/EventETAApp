@@ -60,6 +60,6 @@ export const getMyEvents = () => {
 //TODO: Need to add offset for pagination/infinite scrolling
 export const getUsersAttendingEvent = (eventId) => {
     const path = '/' + eventId + '/attending'
-    const parameters = 'name,picture.width(100).height(100)'
+    const parameters = 'id,name,picture.width(100).height(100)'
     return _makeGraphRequest(path, parameters)
 }

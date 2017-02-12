@@ -2,7 +2,8 @@
 import * as types from 'app/actions/types'
 
 const _initialState = {
-    attendees: []
+    attendees: [],
+    etas: []
 }
 
 const eventETAList = (state = _initialState, action = {}) => {
@@ -11,9 +12,10 @@ const eventETAList = (state = _initialState, action = {}) => {
             return _initialState
 
         case types.REFRESH_USERS_ATTENDING_FB_EVENT:
-            return {
-                attendees: action.attendees
-            }
+            return {...state, attendees: action.attendees}
+
+        case types.REFRESH_EVENT_ETAS:
+            return {...state, etas: action.etas }
 
         default:
             return state;

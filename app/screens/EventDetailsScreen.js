@@ -8,12 +8,28 @@ import EventDetails from 'app/components/EventDetails'
 import EventETAList from 'app/components/EventETAList'
 import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
+import {waitForEventETAs} from 'app/api/firebase'
 
 class EventDetailsScreen extends Component {
 
     constructor(props) {
         super(props)
         this.props.actions.fetchUsersAttendingFBEvent(props.data.event.id)
+    }
+
+    handleUpdateEventETAs(etas) {
+        this.props.actions.refreshEventETAs(etas)
+    }
+
+    componentWillMount() {
+        // register the ETA listener
+        waitForEventETAs(
+            { facebookEventId: this.props.data.event.id },
+            this.handleUpdateEventETAs.bind(this))
+    }
+
+    componentWillUnmount() {
+        // TODO: deregister the ETA listener
     }
 
     render() {
