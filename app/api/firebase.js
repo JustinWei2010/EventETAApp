@@ -36,12 +36,19 @@ export const updateEventEta = (event, eta, hasArrived) => {
   }
 }
 
-export const waitForEventETAs = (event, callback) => {
+export const watchForEventETAs = (event, callback) => {
   if (event.facebookEventId) {
-    console.log(`Wait for event ETA for facebook event id ${event.facebookEventId}`)
+    console.log(`Watch for event ETA for facebook event id ${event.facebookEventId}`)
     firebase.database().ref(`/events/facebook/${event.facebookEventId}/etas`).on('value', snapshot => {
       console.log(`ETAs for facebook id ${event.facebookEventId} updated!`)
       callback(snapshot.val())
     })
+  }
+}
+
+export const stopWatchForEventETAs = (event) => {
+  if (event.facebookEventId) {
+    console.log(`Stop watching event etas for facebook event id ${event.facebookEventId}`)
+    firebase.database().ref(`/events/facebook/${event.facebookEventId}/etas`).off('value')
   }
 }

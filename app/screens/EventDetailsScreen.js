@@ -8,7 +8,7 @@ import EventDetails from 'app/components/EventDetails'
 import EventETAList from 'app/components/EventETAList'
 import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
-import {waitForEventETAs} from 'app/api/firebase'
+import {watchForEventETAs, stopWatchForEventETAs} from 'app/api/firebase'
 
 class EventDetailsScreen extends Component {
 
@@ -22,14 +22,20 @@ class EventDetailsScreen extends Component {
     }
 
     componentWillMount() {
-        // register the ETA listener
-        waitForEventETAs(
-            { facebookEventId: this.props.data.event.id },
+        // register watching for event etas from firebase
+        watchForEventETAs(
+            this.getEvent(),
             this.handleUpdateEventETAs.bind(this))
     }
 
     componentWillUnmount() {
-        // TODO: deregister the ETA listener
+        // deregister watching for event etas from firebase
+        stopWatchForEventETAs(this.getEvent())
+    }
+
+    getEvent() {
+        // Note: This is hard-coded with facebookEventId for now, later we will want to make generic.
+        return { facebookEventId: this.props.data.event.id };
     }
 
     render() {
@@ -59,8 +65,7 @@ class EventDetailsScreen extends Component {
 
     _onUpdateETAPress() {
         this.props.actions.updateEventETA(
-            // Note: This is hard-coded with facebookEventId for now, later we will want to make generic.
-            {facebookEventId: this.props.data.event.id},
+            this.getEvent(),
             new Date(new Date().getTime() + (30 * 60 * 1000)) // right now hard code to 30 mins from now.
          )
     }
