@@ -39,6 +39,7 @@ class EventDetailsScreen extends Component {
     }
 
     render() {
+        const event = this.props.data.event
         return (
             <Container style={styles.container}>
                 <Header>
@@ -46,16 +47,16 @@ class EventDetailsScreen extends Component {
                         <Icon name='ios-arrow-back' />
                     </Button>
                     <Title ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-                            {this.props.data.event.name}
+                            {event.name}
                     </Title>
                 </Header>
                 <Content>
-                    <EventDetails event={this.props.data.event} />
-                    <EventETAList />
+                    <EventDetails event={event} />
+                    <EventETAList attendingCount={event.attendingCount}/>
                     <Button onPress={this._onUpdateETAPress.bind(this)}>Update ETA</Button>
                 </Content>
                 <Footer>
-                    <Button block onPress={this._onClickCheckInButton} style={styles.footerButton}>
+                    <Button block onPress={this._onClickCheckInButton()} style={styles.footerButton}>
                         Check In
                     </Button>
                 </Footer>

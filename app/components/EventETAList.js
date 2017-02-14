@@ -1,5 +1,5 @@
 'use strict'
-import { List, ListItem, Thumbnail, Text, View } from 'native-base'
+import { Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -11,21 +11,34 @@ class EventETAList extends Component {
 
     render() {
         const { attendees, etas } = this.props.eventETAList
-        console.log("EventETAList:")
-        console.log(etas)
-        if (attendees && attendees.length > 0) {
+        return (
+            <View>
+                <View style={styles.listHeader}>
+                    <Text style={styles.listHeaderTitle}>ATTENDING</Text>
+                    <Badge
+                      style={{ backgroundColor: 'black', marginLeft: 10 }}
+                      textStyle={{ color: 'white', fontSize: 13}}>
+                        {this.props.attendingCount}
+                    </Badge>
+                </View>
+                {this._renderETAList()}
+            </View>
+        )
+    }
+
+    _renderETAList = () => {
+        if (this.props.eventETAList.fetching) {
             return (
-                <View>
-                    <View style={styles.listHeader}>
-                        <Text style={styles.listHeaderTitle}>ATTENDING</Text>
-                    </View>
-                    <List dataArray={this.props.eventETAList.attendees}
-                        renderRow={(attendee) => this._renderETAListItem(attendee, etas)}>
-                    </List>
+                <View style={styles.spinnerContainer}>
+                    <Spinner />
                 </View>
             )
         } else {
-            return null
+            return (
+                <List dataArray={this.props.eventETAList.attendees}
+                    renderRow={(attendee) => this._renderETAListItem(attendee, this.props.eventETAList.etas)}>
+                </List>
+            )
         }
     }
 
@@ -80,14 +93,19 @@ const styles = StyleSheet.create({
     },
 
     listHeader: {
-        backgroundColor: '#EFEDEF'
+        backgroundColor: '#EFEDEF',
+        flexDirection: 'row',
     },
 
     listHeaderTitle: {
-        fontSize: 14,
+        fontSize: 16,
         color: '#9C9A9C',
         marginLeft: 20,
         marginVertical: 5
+    },
+
+    spinnerContainer: {
+        alignItems: 'center'
     },
 
     userName: {

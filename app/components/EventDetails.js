@@ -7,13 +7,12 @@ const COLLAPSED_DETAILS_HEIGHT = 200
 
 export default class EventDetails extends Component {
 
-    constructor(props){
-        super(props)
+    componentWillMount() {
         this.state = { 
             initialRender: true,
             detailsHeight: 0,
             collapseDetails: false
-        }
+        }       
     }
 
     render() {
@@ -27,13 +26,21 @@ export default class EventDetails extends Component {
                     <View onLayout={this._setDetailsHeight} style={this.state.collapseDetails ? styles.details : ''}>
                         <Text style={styles.title}>{this.props.event.name}</Text>
                         <Text style={styles.date}>{formatDate(this.props.event.startTime)}</Text>
-                        {this._renderEventAttendingCount()}
+
+                        <TouchableOpacity onPress={this._onClickLocation()}>
+                            <Text style={styles.descriptionSeeMore}>{this.props.event.place}</Text>
+                        </TouchableOpacity> 
+
                         {this._renderEventDescription()}   
                     </View>
                         {this._renderShowMoreButton()}
                 </View> 
             </View>
         )
+    }
+
+    _onClickLocation = () => {
+
     }
 
     _onToggleCollapseDetails = () => {
@@ -54,16 +61,6 @@ export default class EventDetails extends Component {
         }
     }
 
-    _renderEventAttendingCount = () => {
-        if (this.props.event.attendingCount) {
-            return (
-                <Text style={styles.attending}>{this.props.event.attendingCount} attendees</Text>
-            )
-        } else {
-            return null
-        }
-    }
-
     _renderEventDescription = () => {
         if (this.props.event.description) {
             return (
@@ -79,7 +76,7 @@ export default class EventDetails extends Component {
 
     _renderShowMoreButton = () => {
         if (this.state.detailsHeight > COLLAPSED_DETAILS_HEIGHT) {
-            const showDetailsText = this.state.showDetails ? "Show Less" : "See More"
+            const showDetailsText = this.state.collapseDetails ? "Show More" : "Show Less"
             return (
                 <TouchableOpacity onPress={this._onToggleCollapseDetails}>
                     <Text style={styles.descriptionSeeMore}>{showDetailsText}</Text>
