@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { formatDate } from 'app/utils/dateFormatter'
+import * as map from 'app/api/map'
 
 const COLLAPSED_DETAILS_HEIGHT = 200
 
@@ -27,7 +28,7 @@ export default class EventDetails extends Component {
                         <Text style={styles.title}>{this.props.event.name}</Text>
                         <Text style={styles.date}>{formatDate(this.props.event.startTime)}</Text>
 
-                        <TouchableOpacity onPress={this._onClickLocation()}>
+                        <TouchableOpacity onPress={this._onClickLocation}>
                             <Text style={styles.descriptionSeeMore}>{this.props.event.place}</Text>
                         </TouchableOpacity> 
 
@@ -40,7 +41,7 @@ export default class EventDetails extends Component {
     }
 
     _onClickLocation = () => {
-
+        map.showAddressDirections(this.props.event.place)
     }
 
     _onToggleCollapseDetails = () => {
