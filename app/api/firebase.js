@@ -8,11 +8,15 @@ const firebaseConfig = {
   storageBucket: " gs://eta-app-7f982.appspot.com",
 };
 
-var firebaseApp;
+var facebookUserId;
 
 export const init = () => {
   firebase.initializeApp(firebaseConfig);
   console.log("Firebase app initialized.");
+}
+
+export const getFacebookUserId = () => {
+  return facebookUserId;
 }
 
 export const loginWithFacebookUser = (accessToken) => {
@@ -20,6 +24,8 @@ export const loginWithFacebookUser = (accessToken) => {
   firebase.auth().signInWithCredential(credential)
     .then(credData => {
       console.log("Authenticated with firebase!");
+      facebookUserId = credData.providerData.find(
+        provider => provider.providerId === "facebook.com").uid
     }).catch(err => {
       console.log("Error authenticating with firebase! " + err);
     })
@@ -28,9 +34,8 @@ export const loginWithFacebookUser = (accessToken) => {
 export const updateEventEta = (event, eta, hasArrived) => {
   if (event.facebookEventId) {
     const firebaseUserId = firebase.auth().currentUser.uid;
-    const facebookUserId = firebase.auth().currentUser.providerData.find(
-      provider => provider.providerId === "facebook.com").uid;
-    console.log(`Updating ETA for firebaseUserId: ${firebaseUserId}, facebookUserId: ${facebookUserId}, event: ${event.facebookEventId}, eta: ${eta}`)
+    const facebookUserId = getFacebookUserId()
+    console.log(`Updating ETA for firebaseUserId: ${firebaseUserId}, facebookUserId: ${facebookUserId}, event: ${event.facebookEventId}, eta: ${eta}, hasArrived: ${hasArrived}`)
     firebase.database().ref(`/events/facebook/${event.facebookEventId}/etas/${firebaseUserId}`)
             .set({ facebookUserId: facebookUserId, eta: eta.getTime(), hasArrived: hasArrived });
   }

@@ -1,11 +1,14 @@
 'use strict'
-import { Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base'
+import { Button, Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { StyleSheet } from 'react-native'
 
 import { formatDate } from 'app/utils/dateFormatter'
+import * as constants from 'app/constants'
+import * as navigation from 'app/actions/navigation'
+import * as firebase from 'app/api/firebase'
 
 class EventETAList extends Component {
 
@@ -53,7 +56,14 @@ class EventETAList extends Component {
             }
         }
 
-        var etaTime = foundETA ? formatDate(new Date(foundETA.eta)) : 'unknown'
+        var etaTime = ''
+        if (foundETA) {
+            if (foundETA.hasArrived) {
+                etaTime = 'Arrived'
+            } else {
+                etaTime = formatDate(new Date(foundETA.eta))
+            }
+        }
 
         return (
             <ListItem>
@@ -64,18 +74,33 @@ class EventETAList extends Component {
                         <Text style={styles.userName}>{attendee.name}</Text>
                         <Text style={styles.etaTime}>{etaTime}</Text>
                     </View>
-                    <Text>1.3 mi</Text>
+                    {this.renderButton(attendee)}
+
                 </View>
             </ListItem>
         )
     }
 
+    renderButton(attendee) {
+        if (attendee.id == firebase.getFacebookUserId()) {
+            return <Button style={styles.updateETAButton}
+                onPress={this._onUpdateETA.bind(this)}>Update ETA</Button>
+        } else {
+            return <Button>Request ETA</Button>
+        }
+    }
+
+    _onUpdateETA() {
+        this.props.actions.navigateTo(constants.SCREEN.EVENT_UPDATE_ETA, this.props.event)
+    }
 }
 
 export default connect(state => ({
     eventETAList: state.eventETAList
     }),
-    (dispatch) => ({})
+    (dispatch) => ({
+        actions: bindActionCreators(navigation, dispatch)
+    })
 )(EventETAList)
 
 const styles = StyleSheet.create({
@@ -114,6 +139,10 @@ const styles = StyleSheet.create({
 
     etaTime: {
         fontSize: 12
+    },
+
+    updateETAButton: {
+        backgroundColor: '#00CC52'
     }
 
 })

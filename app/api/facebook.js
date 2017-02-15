@@ -8,7 +8,7 @@ export const login = async(readPermissions) => {
     } else if (await response.deniedPermissions) {
         console.log("Missing permissions: " + response.deniedPermissions)
         throw new Error('We need the requested permissions')
-    } 
+    }
 }
 
 export const logout = async() => {

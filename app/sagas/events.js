@@ -6,7 +6,6 @@ import * as firebase from 'app/api/firebase'
 import * as types from 'app/actions/types'
 
 function* _updateEventETA(action) {
-    console.log("Update Event ETA saga: ")
     try {
         switch(action.type) {
             case types.UPDATE_EVENT_ETA:
@@ -29,7 +28,7 @@ function* _fetchUsersAttendingFBEvent(action) {
     } catch (error) {
         //Fix bug here when error during takeEvery
         throw new Error(error)
-    }  
+    }
 }
 
 export function* fetchFBEvents(action) {
@@ -39,7 +38,7 @@ export function* fetchFBEvents(action) {
     } catch (error) {
         //Fix bug here when error during takeLatest
         throw new Error(error)
-    }   
+    }
 }
 
 export function* watchForFetchFBEvents() {

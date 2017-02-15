@@ -52,23 +52,15 @@ class EventDetailsScreen extends Component {
                 </Header>
                 <Content>
                     <EventDetails event={event} />
-                    <EventETAList attendingCount={event.attendingCount}/>
-                    <Button onPress={this._onUpdateETAPress.bind(this)}>Update ETA</Button>
+                    <EventETAList attendingCount={event.attendingCount} event={event}/>
                 </Content>
                 <Footer>
-                    <Button block onPress={this._onClickCheckInButton()} style={styles.footerButton}>
+                    <Button block onPress={() => this._onClickCheckInButton()} style={styles.footerButton}>
                         Check In
                     </Button>
                 </Footer>
             </Container>
         )
-    }
-
-    _onUpdateETAPress() {
-        this.props.actions.updateEventETA(
-            this.getEvent(),
-            new Date(new Date().getTime() + (30 * 60 * 1000)) // right now hard code to 30 mins from now.
-         )
     }
 
     _onClickBackButton = () => {

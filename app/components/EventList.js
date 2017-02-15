@@ -9,11 +9,10 @@ import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
 
 class EventList extends Component {
-	
-	render() { 
+	render() {
 		return (
 			<Card theme={homeTheme}>
-                <CardItem header>                        
+                <CardItem header>
                     <Text>{this.props.title}</Text>
                 </CardItem>
                 <List dataArray={this.props.events}

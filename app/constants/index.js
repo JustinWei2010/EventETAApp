@@ -9,6 +9,7 @@ export const FACEBOOK_PERMISSIONS = {
 // App screen names
 export const SCREEN = {
     EVENT_DETAILS: 'EventDetails',
+    EVENT_UPDATE_ETA: 'EventUpdateETA',
     LOGIN: 'Login',
     HOME: 'Home'
 }

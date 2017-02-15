@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SideBarContainer from 'app/components/SideBarContainer'
 import EventDetailsScreen from 'app/screens/EventDetailsScreen'
+import EventUpdateETAScreen from 'app/screens/EventUpdateETAScreen'
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
 import * as constants from 'app/constants'
@@ -15,7 +16,7 @@ class AppContainer extends Component {
 
     componentDidMount() {
         //Mount Callback for popping history when back button is pressed on android
-        BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)   
+        BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
     }
 
     componentWillUnmount() {
@@ -34,8 +35,13 @@ class AppContainer extends Component {
         switch(this.props.currentScreen.name) {
             case constants.SCREEN.EVENT_DETAILS:
                 return (
-                    <EventDetailsScreen 
+                    <EventDetailsScreen
                         data={this.props.currentScreen.data}/>
+                )
+
+            case constants.SCREEN.EVENT_UPDATE_ETA:
+                return (
+                    <EventUpdateETAScreen data={this.props.currentScreen.data}/>
                 )
 
             case constants.SCREEN.HOME:
