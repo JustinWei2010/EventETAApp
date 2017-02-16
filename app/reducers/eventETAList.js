@@ -9,14 +9,14 @@ const _initialState = {
 
 const eventETAList = (state = _initialState, action = {}) => {
     switch (action.type) {
-        case types.FETCH_USERS_ATTENDING_FB_EVENT:
+        case types.REFRESH_EVENT_ATTENDEES_AND_ETAS:
             return {...state, fetching: true}
 
-        case types.REFRESH_USERS_ATTENDING_FB_EVENT:
-            return {...state, attendees: action.attendees, fetching: false}
-
-        case types.REFRESH_EVENT_ETAS:
+        case types.RECEIVED_EVENT_ETAS:
             return {...state, etas: action.etas }
+
+        case types.RECEIVED_EVENT_ATTENDEES_AND_ETAS:
+            return {...state, attendees: action.attendees, etas: action.etas, fetching: false }
 
         default:
             return state;

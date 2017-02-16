@@ -8,7 +8,7 @@ export default function* rootSaga() {
         events.watchForUpdateEventETA(),
         events.watchForCheckInEvent(),
         events.watchForFetchFBEvents(),
-        events.watchForFetchUsersAttendingFBEvent(),
+        events.watchForRefreshEventAttendeesAndETAs(),
         login.watchForLogin(),
         login.watchForLogout(),
         profile.watchForFetchFBProfile()

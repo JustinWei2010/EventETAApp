@@ -14,23 +14,24 @@ export const refreshFBEvents = (events) => {
     }
 }
 
-export const fetchUsersAttendingFBEvent = (eventId) => {
+export const refreshEventAttendeesAndETAs = (event) => {
     return {
-        type: types.FETCH_USERS_ATTENDING_FB_EVENT,
-        eventId: eventId
+        type: types.REFRESH_EVENT_ATTENDEES_AND_ETAS,
+        event: event
     }
 }
 
-export const refreshUsersAttendingFBEvent = (attendees) => {
+export const receivedEventAttendeesAndETAs = (attendees, etas) => {
     return {
-        type: types.REFRESH_USERS_ATTENDING_FB_EVENT,
-        attendees: attendees
+        type: types.RECEIVED_EVENT_ATTENDEES_AND_ETAS,
+        attendees: attendees,
+        etas: etas
     }
 }
 
-export const refreshEventETAs = (etas) => {
+export const receivedEventETAs = (etas) => {
     return {
-        type: types.REFRESH_EVENT_ETAS,
+        type: types.RECEIVED_EVENT_ETAS,
         etas: etas
     }
 }

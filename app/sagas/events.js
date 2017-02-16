@@ -1,6 +1,6 @@
 'use strict'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { refreshFBEvents, refreshUsersAttendingFBEvent, refreshEventETAs } from 'app/actions/events'
+import { refreshFBEvents, receivedEventAttendeesAndETAs } from 'app/actions/events'
 import * as facebook from 'app/api/facebook'
 import * as firebase from 'app/api/firebase'
 import * as types from 'app/actions/types'
@@ -21,11 +21,13 @@ function* _updateEventETA(action) {
     }
 }
 
-function* _fetchUsersAttendingFBEvent(action) {
-      try {
-        const attendees = yield call(facebook.getUsersAttendingEvent, action.eventId)
-        yield put(refreshUsersAttendingFBEvent(attendees.data))
+function* _refreshEventAttendeesAndETAs(action) {
+    try {
+        const attendees = yield call(facebook.getUsersAttendingEvent, action.event.facebookEventId)
+        const etas = yield call(firebase.getEventETAs, action.event)
+        yield put(receivedEventAttendeesAndETAs(attendees.data, etas))
     } catch (error) {
+        console.log(error)
         //Fix bug here when error during takeEvery
         throw new Error(error)
     }
@@ -57,6 +59,6 @@ export function* watchForWaitForEventETAs() {
     yield takeLatest(types.WAIT_FOR_EVENT_ETAS, _waitForEventETAs)
 }
 
-export function* watchForFetchUsersAttendingFBEvent() {
-    yield takeEvery(types.FETCH_USERS_ATTENDING_FB_EVENT, _fetchUsersAttendingFBEvent)
+export function* watchForRefreshEventAttendeesAndETAs() {
+    yield takeLatest(types.REFRESH_EVENT_ATTENDEES_AND_ETAS, _refreshEventAttendeesAndETAs)
 }

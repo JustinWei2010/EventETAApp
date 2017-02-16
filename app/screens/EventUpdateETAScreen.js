@@ -39,32 +39,6 @@ const etaSuggestions = [
 class EventUpdateETAScreen extends Component {
     constructor(props) {
         super(props)
-        this.suggestions = [
-        {
-            text: '5 mins',
-            value: 5
-        },
-        {
-            text: '10 mins',
-            value: 10
-        },
-        {
-            text: '15 mins',
-            value: 15
-        },
-        {
-            text: '30 mins',
-            value: 30
-        },
-        {
-            text: '45 mins',
-            value: 45
-        },
-        {
-            text: '1 hour',
-            value: 60
-        }
-    ]
     }
 
     render() {
@@ -77,7 +51,7 @@ class EventUpdateETAScreen extends Component {
                     <Title>Update ETA</Title>
                 </Header>
                 <Content>
-                    <List dataArray={this.suggestions}
+                    <List dataArray={etaSuggestions}
                         renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
                     </List>
                 </Content>

@@ -14,18 +14,19 @@ class EventDetailsScreen extends Component {
 
     constructor(props) {
         super(props)
-        this.props.actions.fetchUsersAttendingFBEvent(props.data.event.id)
     }
 
-    handleUpdateEventETAs(etas) {
-        this.props.actions.refreshEventETAs(etas)
+    handleReceivedEventETAs(etas) {
+        this.props.actions.receivedEventETAs(etas)
     }
 
     componentWillMount() {
         // register watching for event etas from firebase
+        this.props.actions.refreshEventAttendeesAndETAs(this.getEvent())
+
         watchForEventETAs(
             this.getEvent(),
-            this.handleUpdateEventETAs.bind(this))
+            this.handleReceivedEventETAs.bind(this))
     }
 
     componentWillUnmount() {
@@ -55,7 +56,7 @@ class EventDetailsScreen extends Component {
                     <EventETAList attendingCount={event.attendingCount} event={event}/>
                 </Content>
                 <Footer>
-                    <Button block onPress={() => this._onClickCheckInButton()} style={styles.footerButton}>
+                    <Button block onPress={this._onClickCheckInButton} style={styles.footerButton}>
                         Check In
                     </Button>
                 </Footer>
