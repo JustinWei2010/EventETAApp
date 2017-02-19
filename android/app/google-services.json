@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "122115509966",
+    "firebase_url": "https://eta-app-7f982.firebaseio.com",
+    "project_id": "eta-app-7f982",
+    "storage_bucket": "eta-app-7f982.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122115509966:android:e7931764e3145c69",
+        "android_client_info": {
+          "package_name": "com.eventetaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122115509966-ui4v3tqbqs21j9c0eh48ek4buonrjpn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZnpS6KLEYwxS6_OmyLmP99LWTJsDyMxI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

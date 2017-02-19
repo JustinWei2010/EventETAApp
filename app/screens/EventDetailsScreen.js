@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import EventDetails from 'app/components/EventDetails'
 import EventETAList from 'app/components/EventETAList'
+import * as firebase from 'app/api/firebase'
 import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
 import {watchForEventETAs, stopWatchForEventETAs} from 'app/api/firebase'
@@ -22,21 +23,16 @@ class EventDetailsScreen extends Component {
 
     componentWillMount() {
         // register watching for event etas from firebase
-        this.props.actions.refreshEventAttendeesAndETAs(this.getEvent())
+        this.props.actions.refreshEventAttendeesAndETAs(this.props.data.event)
 
         watchForEventETAs(
-            this.getEvent(),
+            this.props.data.event,
             this.handleReceivedEventETAs.bind(this))
     }
 
     componentWillUnmount() {
         // deregister watching for event etas from firebase
-        stopWatchForEventETAs(this.getEvent())
-    }
-
-    getEvent() {
-        // Note: This is hard-coded with facebookEventId for now, later we will want to make generic.
-        return { facebookEventId: this.props.data.event.id };
+        stopWatchForEventETAs(this.props.data.event)
     }
 
     render() {
@@ -56,7 +52,7 @@ class EventDetailsScreen extends Component {
                     <EventETAList attendingCount={event.attendingCount} event={event}/>
                 </Content>
                 <Footer>
-                    <Button block onPress={this._onClickCheckInButton} style={styles.footerButton}>
+                    <Button block onPress={this._onClickCheckInButton.bind(this)} style={styles.footerButton}>
                         Check In
                     </Button>
                 </Footer>
@@ -69,14 +65,22 @@ class EventDetailsScreen extends Component {
     }
 
     _onClickCheckInButton = () => {
-        this.props.actions.checkInEvent(
-            {facebookEventId: this.props.data.event.id}
-        )
+        const facebookUserId = firebase.getFacebookUserId()
+        const attendee = this.props.attendees.find(x => x.id == facebookUserId)
+        if (attendee) {
+            this.props.actions.checkInEvent(
+                this.props.data.event,
+                attendee
+            )
+        } else {
+            console.error('User not an attendee of event -- cannot checkIn.')
+        }
     }
 
 }
 
 export default connect(state => ({
+        attendees: state.eventETAList.attendees
     }),
     (dispatch) => ({
         actions: bindActionCreators({ ...events, ...navigation }, dispatch)

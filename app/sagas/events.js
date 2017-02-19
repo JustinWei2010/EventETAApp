@@ -9,10 +9,10 @@ function* _updateEventETA(action) {
     try {
         switch(action.type) {
             case types.UPDATE_EVENT_ETA:
-                yield call(firebase.updateEventEta, action.details.event, action.details.eta, false);
+                yield call(firebase.updateEventEta, action.details.event, action.details.eta);
                 break;
             case types.CHECK_IN_EVENT:
-                yield call(firebase.updateEventEta, action.details.event, new Date(), true);
+                yield call(firebase.checkInEvent, action.details.event, action.details.attendee);
                 break;
         }
     } catch (error) {
@@ -23,7 +23,7 @@ function* _updateEventETA(action) {
 
 function* _refreshEventAttendeesAndETAs(action) {
     try {
-        const attendees = yield call(facebook.getUsersAttendingEvent, action.event.facebookEventId)
+        const attendees = yield call(facebook.getUsersAttendingEvent, action.event.id)
         const etas = yield call(firebase.getEventETAs, action.event)
         yield put(receivedEventAttendeesAndETAs(attendees.data, etas))
     } catch (error) {

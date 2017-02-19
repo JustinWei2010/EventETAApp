@@ -14,3 +14,8 @@ export const SCREEN = {
     HOME: 'Home'
 }
 
+// Event Types
+export const EVENT_TYPE = {
+    FACEBOOK: 'facebook'
+}
+

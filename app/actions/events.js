@@ -46,11 +46,12 @@ export const updateEventETA = (event, eta) => {
     }
 }
 
-export const checkInEvent = (event) => {
+export const checkInEvent = (event, attendee) => {
     return {
         type: types.CHECK_IN_EVENT,
         details: {
-            event: event
+            event: event,
+            attendee: attendee
         }
     }
 }

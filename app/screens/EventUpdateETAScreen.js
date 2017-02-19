@@ -76,7 +76,7 @@ class EventUpdateETAScreen extends Component {
 
     _onSelectETA = (suggestion) => {
         this.props.actions.updateEventETA(
-            { facebookEventId : this.props.data.id },
+            this.props.data,
             new Date(new Date().getTime() + (suggestion.value * 60 * 1000))
         )
 

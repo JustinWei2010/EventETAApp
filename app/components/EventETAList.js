@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { StyleSheet } from 'react-native'
+import _ from 'lodash'
 
 import { formatDate } from 'app/utils/dateFormatter'
 import * as constants from 'app/constants'
@@ -47,15 +48,7 @@ class EventETAList extends Component {
 
     _renderETAListItem = (attendee, etas) => {
         // probably a better way to do this in javascript?
-        var foundETA = null
-        for (var etaKey in etas) {
-            const eta = etas[etaKey]
-            if (eta.facebookUserId == attendee.id) {
-                foundETA = eta
-                break
-            }
-        }
-
+        var foundETA = _.find(etas, eta => eta.facebookUserId == attendee.id)
         var etaTime = ''
         if (foundETA) {
             if (foundETA.hasArrived) {
@@ -84,7 +77,7 @@ class EventETAList extends Component {
     renderButton(attendee) {
         if (attendee.id == firebase.getFacebookUserId()) {
             return <Button style={styles.updateETAButton}
-                onPress={this._onUpdateETA.bind(this)}>Update ETA</Button>
+                onPress={(this)._onUpdateETA.bind(this)}>Update ETA</Button>
         } else {
             return <Button>Request ETA</Button>
         }

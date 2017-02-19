@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+
 import AppContainer from 'app/components/AppContainer'
 import rootSaga from 'app/sagas'
 import * as initApp from 'app/sagas/initApp'
@@ -19,7 +20,6 @@ sagaMiddleware.run(rootSaga)
 sagaMiddleware.run(initApp.initialize)
 
 export default class App extends Component {
-
     render() {
         return (
             <Provider store={_store}>
@@ -29,3 +29,4 @@ export default class App extends Component {
     }
 
 }
+

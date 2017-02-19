@@ -21,7 +21,7 @@ class HomeScreen extends Component {
                 <Header>
                     <Button transparent onPress={this._onClickMenuButton}>
                         <Icon name='ios-menu' />
-                    </Button>      
+                    </Button>
                     <Title>ETA</Title>
                 </Header>
                 <Content>
@@ -51,12 +51,12 @@ class HomeScreen extends Component {
         const currentStart = moment().startOf('d')
         const currentEnd = moment(currentStart).add(1, 'd').subtract(1, 's')
         const upcomingStart = moment(currentStart).add(1, 'd')
-        const upcomingEnd = moment(upcomingStart).add(1, 'M').subtract(1, 's')
+        const upcomingEnd = moment(upcomingStart).add(2, 'M').subtract(1, 's')
         const pastStart = moment(currentStart).subtract(2, 'w')
         const pastEnd = moment(currentStart).subtract(1, 's')
 
         events.forEach((event) => {
-            const eventTime = moment(event.start_time)
+            const eventTime = moment(event.startTime)
             if (eventTime >= currentStart && eventTime <= currentEnd) {
                 filteredEvents.current.push(event)
             } else if (eventTime >= upcomingStart && eventTime <= upcomingEnd) {

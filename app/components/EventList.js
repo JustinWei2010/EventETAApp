@@ -26,38 +26,17 @@ class EventList extends Component {
 	_renderEvent = (event) => {
         return (
             <ListItem style={{flex:1}} button onPress={() => this._onClickEvent(event)}>
-                <Thumbnail square size={100} source={{uri: this._getCoverSource(event.cover)}} />
+                <Thumbnail square size={100} source={{uri: event.source.uri}} />
                 <Text>{event.name}</Text>
-                <Text note>{formatDate(event.start_time)}</Text>
-                <Text note>{this._getLocationName(event.place)}</Text>
+                <Text note>{formatDate(event.startTime)}</Text>
+                <Text note>{event.place}</Text>
             </ListItem>
         )
 	}
 
-    _getCoverSource = (cover) => {
-        if (cover && cover.source) {
-            return cover.source
-        }
-        // Need to make default picture consistent with details page, should not be on external site in case of no internet
-        return 'https://facebook.github.io/react/img/logo_og.png'
-    }
-
-	_getLocationName = (place) => {
-        return place ? place.name : ''
-    }
-
     _onClickEvent = (event) => {
         const data = {
-            event: {
-                id: event.id,
-                name: event.name,
-                place: this._getLocationName(event.place),
-                startTime: event.start_time,
-                description: event.description,
-                attendingCount: event.attending_count,
-                // Need to make default picture consistent with event list
-                source: event.cover && event.cover.source ? { uri: event.cover.source } : require('app/resources/eventCover.jpg')
-            }
+            event: event
         }
         this.props.actions.navigateTo(constants.SCREEN.EVENT_DETAILS, data)
     }

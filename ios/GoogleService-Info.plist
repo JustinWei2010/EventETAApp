@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>122115509966-u1dosm5kg32b4haj7espm5muhlp2ju9o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.122115509966-u1dosm5kg32b4haj7espm5muhlp2ju9o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBgdPR_EKEWqOquda34e6up_Bzw5NJzqbs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>122115509966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.eventetaapp.EventETAApp</string>
+	<key>PROJECT_ID</key>
+	<string>eta-app-7f982</string>
+	<key>STORAGE_BUCKET</key>
+	<string>eta-app-7f982.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:122115509966:ios:3c0d1a337d88cb7c</string>
+	<key>DATABASE_URL</key>
+	<string>https://eta-app-7f982.firebaseio.com</string>
+</dict>
+</plist>

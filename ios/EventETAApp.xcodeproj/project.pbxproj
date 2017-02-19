@@ -31,13 +31,16 @@
 		5D94A811F8A14E8A9F933320 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6240860F77214D328149DD5C /* Octicons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		694C358A505843F68FB5508C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8B87A6FD02F44C5B9DFAD85 /* MaterialIcons.ttf */; };
+		6B937F517B0A6837CF178AD9 /* Pods_EventETAAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B162914532388A085D4932 /* Pods_EventETAAppTests.framework */; };
 		6E44DA273E5C4199A5A275CF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3105E603BA084D8290DA96A7 /* Ionicons.ttf */; };
 		6E4500717D894444802788A0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3956A61D38B24099BF73B02B /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		93FB3E79690C42EFBE1236DB /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47F55AA7ACF542A1AE00EEB0 /* libRNFIRMessaging.a */; };
 		AC0498D41F374A0B8B21DBFF /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F00251BD5464C3EB6AB80CF /* libRNVectorIcons.a */; };
 		BA9EEDEC352A45E18DDE6288 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C12A39BFA13D4284AE27719A /* libRCTFBSDK.a */; };
 		BC28C87EC1E44192B86F91F8 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 428763680C2346F08E10C81C /* Foundation.ttf */; };
 		C0AC40CD72814A54A01F8553 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24A0ED12D7A3475FB3C24C2E /* EvilIcons.ttf */; };
+		C82878E7008D9C995C4C8670 /* Pods_EventETAApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C34BEF95A585699DA8C5CF /* Pods_EventETAApp.framework */; };
 		E180BF05BED54851BD20547C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B07C7E4EBC7A4154832BFC9F /* SimpleLineIcons.ttf */; };
 		F9FB4AE4C998473AB1A5CFE8 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D669C34F3B1485185EA4CF2 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
@@ -239,6 +242,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		BCC931E91E599F5D00657D8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B436891674BC4D06979336EC /* RNFIRMessaging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFIRMessaging;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -267,10 +277,14 @@
 		200830641E530007003A3253 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		200830651E530007003A3253 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		200830661E530007003A3253 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		21C34BEF95A585699DA8C5CF /* Pods_EventETAApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventETAApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A0ED12D7A3475FB3C24C2E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		28B162914532388A085D4932 /* Pods_EventETAAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventETAAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3105E603BA084D8290DA96A7 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		3956A61D38B24099BF73B02B /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		428763680C2346F08E10C81C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		47F55AA7ACF542A1AE00EEB0 /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
+		4F176EE6DD1860152FD53FD9 /* Pods-EventETAAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventETAAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventETAAppTests/Pods-EventETAAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5D669C34F3B1485185EA4CF2 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6240860F77214D328149DD5C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -279,8 +293,12 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9C113E9310224ACB822B5A56 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		B07C7E4EBC7A4154832BFC9F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		B38F074FC987DA87B332586E /* Pods-EventETAAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventETAAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventETAAppTests/Pods-EventETAAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B436891674BC4D06979336EC /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFIRMessaging.xcodeproj; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; };
 		C12A39BFA13D4284AE27719A /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
+		CAA2E6A9C009658056D1F547 /* Pods-EventETAApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventETAApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventETAApp/Pods-EventETAApp.release.xcconfig"; sourceTree = "<group>"; };
 		D8B87A6FD02F44C5B9DFAD85 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		F379151A9C1A7AFCE74C813D /* Pods-EventETAApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventETAApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventETAApp/Pods-EventETAApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F90B47266DB843D1AE7B6B4C /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -290,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				6B937F517B0A6837CF178AD9 /* Pods_EventETAAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +334,8 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				AC0498D41F374A0B8B21DBFF /* libRNVectorIcons.a in Frameworks */,
 				BA9EEDEC352A45E18DDE6288 /* libRCTFBSDK.a in Frameworks */,
+				93FB3E79690C42EFBE1236DB /* libRNFIRMessaging.a in Frameworks */,
+				C82878E7008D9C995C4C8670 /* Pods_EventETAApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +466,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		79D7E02A70000818D1B0C11D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F379151A9C1A7AFCE74C813D /* Pods-EventETAApp.debug.xcconfig */,
+				CAA2E6A9C009658056D1F547 /* Pods-EventETAApp.release.xcconfig */,
+				B38F074FC987DA87B332586E /* Pods-EventETAAppTests.debug.xcconfig */,
+				4F176EE6DD1860152FD53FD9 /* Pods-EventETAAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7DF2973B1E1E40D000079D07 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +501,8 @@
 				200830641E530007003A3253 /* FBSDKLoginKit.framework */,
 				200830651E530007003A3253 /* FBSDKMessengerShareKit.framework */,
 				200830661E530007003A3253 /* FBSDKShareKit.framework */,
+				21C34BEF95A585699DA8C5CF /* Pods_EventETAApp.framework */,
+				28B162914532388A085D4932 /* Pods_EventETAAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -489,6 +523,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				9C113E9310224ACB822B5A56 /* RNVectorIcons.xcodeproj */,
 				F90B47266DB843D1AE7B6B4C /* RCTFBSDK.xcodeproj */,
+				B436891674BC4D06979336EC /* RNFIRMessaging.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -511,6 +546,7 @@
 				00E356EF1AD99517003FC87E /* EventETAAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				8D35018230754515A8EC0902 /* Resources */,
+				79D7E02A70000818D1B0C11D /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -541,6 +577,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		BCC931CC1E599F5D00657D8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCC931EA1E599F5D00657D8A /* libRNFIRMessaging.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -548,9 +592,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EventETAAppTests" */;
 			buildPhases = (
+				28AAE2325F96FFBBFFEA1C37 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				2A63CCDAF8916869E9DB16F0 /* [CP] Embed Pods Frameworks */,
+				E1E6611302E128DE0775F4E0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -566,10 +613,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EventETAApp" */;
 			buildPhases = (
+				80679DAE7BD7EFC8535B57E3 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				0B1317C18A9CB5744895FB07 /* [CP] Embed Pods Frameworks */,
+				0301DD4A6EBAD5A9E4598438 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -654,6 +704,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = BCC931CC1E599F5D00657D8A /* Products */;
+					ProjectRef = B436891674BC4D06979336EC /* RNFIRMessaging.xcodeproj */;
 				},
 				{
 					ProductGroup = 7DF2973B1E1E40D000079D07 /* Products */;
@@ -858,6 +912,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		BCC931EA1E599F5D00657D8A /* libRNFIRMessaging.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFIRMessaging.a;
+			remoteRef = BCC931E91E599F5D00657D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -902,6 +963,96 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		0301DD4A6EBAD5A9E4598438 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventETAApp/Pods-EventETAApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0B1317C18A9CB5744895FB07 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventETAApp/Pods-EventETAApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28AAE2325F96FFBBFFEA1C37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2A63CCDAF8916869E9DB16F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventETAAppTests/Pods-EventETAAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80679DAE7BD7EFC8535B57E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1E6611302E128DE0775F4E0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventETAAppTests/Pods-EventETAAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -948,6 +1099,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B38F074FC987DA87B332586E /* Pods-EventETAAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -961,6 +1113,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EventETAApp.app/EventETAApp";
@@ -969,6 +1122,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F176EE6DD1860152FD53FD9 /* Pods-EventETAAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -979,6 +1133,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EventETAApp.app/EventETAApp";
@@ -987,11 +1142,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F379151A9C1A7AFCE74C813D /* Pods-EventETAApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				FRAMEWORK_SEARCH_PATHS = "~/Documents/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = EventETAApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -999,6 +1156,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.eventetaapp.EventETAApp;
 				PRODUCT_NAME = EventETAApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1006,10 +1164,11 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA2E6A9C009658056D1F547 /* Pods-EventETAApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = "~/Documents/FacebookSDK";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = EventETAApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1017,6 +1176,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.eventetaapp.EventETAApp;
 				PRODUCT_NAME = EventETAApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
