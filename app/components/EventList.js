@@ -1,5 +1,6 @@
 'use strict'
 import { Card, CardItem, Text, Thumbnail, List, ListItem } from 'native-base'
+import { StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,7 +14,7 @@ class EventList extends Component {
 		return (
 			<Card theme={homeTheme}>
                 <CardItem header>
-                    <Text>{this.props.title}</Text>
+                    <Text style={styles.label}>{this.props.title}</Text>
                 </CardItem>
                 <List dataArray={this.props.events}
                 		renderRow={(event) => this._renderEvent(event)}>
@@ -62,6 +63,14 @@ class EventList extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    label: {
+        fontWeight: "600",
+        fontStyle: "italic",
+    }
+
+})
 
 export default connect(state => ({
 	}),
