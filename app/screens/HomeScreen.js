@@ -1,6 +1,8 @@
 'use strict'
 import moment from 'moment'
-import { Button, Container, Content, Header, Icon, Title } from 'native-base'
+import { Button, Container, Content, Header, Icon, Title } from 'native-base/backward'
+import { StyleProvider,getTheme } from 'native-base';
+import material from 'app/native-base-theme/variables/material';
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
@@ -24,6 +26,7 @@ class HomeScreen extends Component {
                     </Button>
                     <Title>ETA</Title>
                 </Header>
+                <StyleProvider  style={getTheme(material)}>
                 <Content>
                     <EventList title="Current Events"
                             events={filteredEvents.current} />
@@ -34,6 +37,7 @@ class HomeScreen extends Component {
                     <EventList title="Past Events"
                             events={filteredEvents.past} />
                 </Content>
+                </StyleProvider>
             </Container>
         )
     }
@@ -82,10 +86,10 @@ export default connect(state => ({
     })
 )(HomeScreen)
 
-const styles = StyleSheet.create({
+const styles = {
 
     container: {
         backgroundColor: 'white'
     }
 
-})
+}

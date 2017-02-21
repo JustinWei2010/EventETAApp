@@ -1,5 +1,5 @@
 'use strict'
-import { Button, Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base'
+import { Button, Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base/backward'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -20,9 +20,9 @@ class EventETAList extends Component {
                 <View style={styles.listHeader}>
                     <Text style={styles.listHeaderTitle}>ATTENDING</Text>
                     <Badge
-                      style={{ backgroundColor: 'black', marginLeft: 10 }}
+                      style={{ backgroundColor: 'green', marginLeft: 10 }}
                       textStyle={{ color: 'white', fontSize: 13}}>
-                        {this.props.attendingCount}
+                        <Text>{this.props.attendingCount}</Text>
                     </Badge>
                 </View>
                 {this._renderETAList()}
@@ -96,7 +96,7 @@ export default connect(state => ({
     })
 )(EventETAList)
 
-const styles = StyleSheet.create({
+const styles = {
 
     detailsContainer: {
         flexDirection: 'row',
@@ -138,4 +138,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#00CC52'
     }
 
-})
+}

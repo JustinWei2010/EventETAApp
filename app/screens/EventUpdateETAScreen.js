@@ -1,11 +1,12 @@
 'use strict'
-import { Button, Container, Content, Text, Card, CardItem, List, ListItem, Header, Icon, Title } from 'native-base'
+import { Button, Container, Content, Text, Card, CardItem, List, ListItem, Header, Icon, Title } from 'native-base/backward'
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import homeTheme from 'app/themes/homeTheme'
+import { StyleProvider,getTheme } from 'native-base';
+import material from 'app/native-base-theme/variables/material';
 import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
 
@@ -50,18 +51,18 @@ class EventUpdateETAScreen extends Component {
                     </Button>
                     <Title>Update ETA</Title>
                 </Header>
+                <StyleProvider  style={getTheme(material)}>
                 <Content>
-                    <List dataArray={etaSuggestions}
-                        renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
-                    </List>
+                    <Card>
+                        <CardItem header>
+                            <Text>ETA Suggestions</Text>
+                        </CardItem>
+                        <List dataArray={etaSuggestions}
+                            renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
+                        </List>
+                    </Card>
                 </Content>
-
-                <Card theme={homeTheme}>
-                    <CardItem header>
-                        <Text>ETA Suggestions</Text>
-                    </CardItem>
-
-                </Card>
+                </StyleProvider>
             </Container>
         )
     }
@@ -95,8 +96,8 @@ export default connect(state => ({
     })
 )(EventUpdateETAScreen)
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         backgroundColor: 'white',
     }
-})
+}

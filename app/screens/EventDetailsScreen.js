@@ -1,5 +1,5 @@
 'use strict'
-import { Button, Container, Content, Footer, Header, Icon, Title } from 'native-base'
+import { Button, Container, Content, Footer, Header, Icon, Title } from 'native-base/backward'
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
@@ -87,7 +87,7 @@ export default connect(state => ({
     })
 )(EventDetailsScreen)
 
-const styles = StyleSheet.create({
+const styles = {
 
     container: {
         backgroundColor: 'white',
@@ -99,8 +99,9 @@ const styles = StyleSheet.create({
     },
 
     footerButton: {
+        flex: 1,
         marginHorizontal: 10,
         backgroundColor: '#00CC52'
     }
 
-})
+}

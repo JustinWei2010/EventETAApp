@@ -1,5 +1,5 @@
 'use strict'
-import { Container } from 'native-base'
+import { Container } from 'native-base/backward'
 import React, { Component } from 'react'
 import { BackAndroid, Platform } from 'react-native'
 import { connect } from 'react-redux'

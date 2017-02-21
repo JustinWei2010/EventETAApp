@@ -1,5 +1,5 @@
 'use strict'
-import { Container, Text, View } from 'native-base'
+import { Container, Text, View } from 'native-base/backward'
 import React, { Component } from 'react'
 import { Image, StyleSheet } from 'react-native'
 import Carousel from 'react-native-looped-carousel'
@@ -52,7 +52,7 @@ export default connect(state => ({
     })
 )(LoginScreen)
 
-const styles = StyleSheet.create({
+const styles = {
 
     container: {
         backgroundColor: 'white'
@@ -74,5 +74,4 @@ const styles = StyleSheet.create({
         width: null,
         resizeMode:'stretch'
     }
-
-})
+}

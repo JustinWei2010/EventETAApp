@@ -89,7 +89,7 @@ export default class EventDetails extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
 
     attending: {
         fontSize: 15,
@@ -146,4 +146,4 @@ const styles = StyleSheet.create({
         fontSize: 17
     }
 
-})
+}

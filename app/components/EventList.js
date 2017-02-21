@@ -1,10 +1,9 @@
 'use strict'
-import { Card, CardItem, Text, Thumbnail, List, ListItem } from 'native-base'
+import { Card, CardItem, Text, Thumbnail, List, ListItem } from 'native-base/backward'
 import { StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import homeTheme from 'app/themes/homeTheme'
 import { formatDate } from 'app/utils/dateFormatter'
 import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
@@ -12,7 +11,7 @@ import * as navigation from 'app/actions/navigation'
 class EventList extends Component {
 	render() {
 		return (
-			<Card theme={homeTheme}>
+			<Card>
                 <CardItem header>
                     <Text style={styles.label}>{this.props.title}</Text>
                 </CardItem>
@@ -43,13 +42,12 @@ class EventList extends Component {
 
 }
 
-const styles = StyleSheet.create({
+const styles = {
     label: {
         fontWeight: "600",
         fontStyle: "italic",
     }
-
-})
+}
 
 export default connect(state => ({
 	}),

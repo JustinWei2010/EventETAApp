@@ -1,5 +1,6 @@
 'use strict'
-import { Content, Text, List, ListItem, Icon, Thumbnail, View } from 'native-base'
+import { Content, Text, List, ListItem, Thumbnail, View } from 'native-base/backward'
+import { Icon } from 'native-base'
 import React, { Component } from 'react'
 import { Platform, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
@@ -24,10 +25,10 @@ class SideBar extends Component {
                 <List>   
                     <ListItem button iconLeft onPress={this._onClickLogoutButton}>
                         <View style={styles.listItemContainer}>
-                            <View style={[styles.iconContainer, { backgroundColor: '#4DCAE0', paddingLeft: 14 }]}>
+                            <View>
                                 <Icon name="md-power" style={styles.sidebarIcon} />
                             </View>
-                            <Text style={styles.text}>Logout</Text>
+                            <Text style={styles.text}>  Logout</Text>
                         </View>
                     </ListItem>
                 </List>
@@ -50,7 +51,7 @@ export default connect(state => ({
     })
 )(SideBar)
 
-const styles = StyleSheet.create({
+const styles = {
 
     sidebar: {
         flex: 1,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
 
     sidebarIcon: {
         fontSize: 21,
-        color: '#fff',
+        color: 'red',
         lineHeight: (Platform.OS === 'android') ? 21 : 25,
         backgroundColor: 'transparent'
     },
@@ -107,5 +108,4 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 16
     }
-
-})
+}
