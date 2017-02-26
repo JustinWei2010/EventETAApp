@@ -28,6 +28,9 @@ class EventDetailsScreen extends Component {
     componentWillUnmount() {
         // deregister watching for event etas from firebase
         firebase.stopWatchForEventETAs(this.props.data.event)
+
+        // clear event etas and attendees from redux store when exit Detail Screen
+        this.props.actions.clearEventAttendeesAndETAs()
     }
 
     render() {

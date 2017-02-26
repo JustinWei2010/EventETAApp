@@ -18,6 +18,9 @@ const eventETAList = (state = _initialState, action = {}) => {
         case types.RECEIVED_EVENT_ATTENDEES_AND_ETAS:
             return {...state, attendees: action.attendees, etas: action.etas, fetching: false }
 
+        case types.CLEAR_EVENT_ATTENDEES_AND_ETAS:
+            return {...state, attendees: action.attendees, etas: action.etas, fetching: false }
+
         default:
             return state;
     }
