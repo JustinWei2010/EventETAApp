@@ -1,5 +1,5 @@
 'use strict'
-import { Button, Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base/backward'
+import { Button, Badge, List, ListItem, Spinner, Thumbnail, Text, View } from 'native-base'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,15 +13,14 @@ import * as firebase from 'app/api/firebase'
 
 class EventETAList extends Component {
 
+//color: 'white', fontSize: 13
     render() {
         const { attendees, etas } = this.props.eventETAList
         return (
             <View>
                 <View style={styles.listHeader}>
                     <Text style={styles.listHeaderTitle}>ATTENDING</Text>
-                    <Badge
-                      style={{ backgroundColor: 'green', marginLeft: 10 }}
-                      textStyle={{ color: 'white', fontSize: 13}}>
+                    <Badge style={styles.attendingCountBadge}>
                         <Text>{this.props.attendingCount}</Text>
                     </Badge>
                 </View>
@@ -30,12 +29,34 @@ class EventETAList extends Component {
         )
     }
 
+    _onClickRequestETAButton = () => {
+
+    }
+
+    _onClickUpdateETAButton = () => {
+        this.props.actions.navigateTo(constants.SCREEN.EVENT_UPDATE_ETA, this.props.event)
+    }
+
+    _renderETAButton = (attendee) => {
+        if (attendee.id === firebase.getFacebookUserId()) {
+            return (
+                <Button style={styles.updateETAButton} onPress={this._onClickUpdateETAButton}>
+                    <Text>Update ETA</Text>
+                </Button>
+            )
+        } else {
+            return (
+                <Button onPress={this._onClickRequestETAButton}>
+                    <Text>Request ETA</Text>
+                </Button>
+            )
+        }
+    }
+
     _renderETAList = () => {
         if (this.props.eventETAList.fetching) {
             return (
-                <View style={styles.spinnerContainer}>
-                    <Spinner />
-                </View>
+                <Spinner style={styles.etaSpinner} />
             )
         } else {
             return (
@@ -61,30 +82,16 @@ class EventETAList extends Component {
         return (
             <ListItem>
                 <View style={styles.detailsContainer}>
-                    <Thumbnail size={50} source={ attendee.picture ? {uri: attendee.picture.data.url} :
+                    <Thumbnail style={styles.thumbnail} source={ attendee.picture ? {uri: attendee.picture.data.url} :
                         require("app/resources/profile.png") } />
                     <View style={styles.detailsContent}>
                         <Text style={styles.userName}>{attendee.name}</Text>
                         <Text style={styles.etaTime}>{etaTime}</Text>
                     </View>
-                    {this.renderButton(attendee)}
-
+                    {this._renderETAButton(attendee)}
                 </View>
             </ListItem>
         )
-    }
-
-    renderButton(attendee) {
-        if (attendee.id == firebase.getFacebookUserId()) {
-            return <Button style={styles.updateETAButton}
-                onPress={(this)._onUpdateETA.bind(this)}>Update ETA</Button>
-        } else {
-            return <Button>Request ETA</Button>
-        }
-    }
-
-    _onUpdateETA() {
-        this.props.actions.navigateTo(constants.SCREEN.EVENT_UPDATE_ETA, this.props.event)
     }
 }
 
@@ -98,6 +105,11 @@ export default connect(state => ({
 
 const styles = {
 
+    attendingCountBadge: {
+        backgroundColor: 'green', 
+        marginLeft: 10
+    },
+
     detailsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -108,6 +120,10 @@ const styles = {
         flexDirection: 'column',
         marginLeft: 20,
         flex: 1
+    },
+
+    etaTime: {
+        fontSize: 12
     },
 
     listHeader: {
@@ -122,20 +138,21 @@ const styles = {
         marginVertical: 5
     },
 
-    spinnerContainer: {
+    etaSpinner: {
         alignItems: 'center'
     },
 
-    userName: {
-        fontSize: 16
-    },
-
-    etaTime: {
-        fontSize: 12
+    thumbnail: {
+        width: 50,
+        height: 50
     },
 
     updateETAButton: {
         backgroundColor: '#00CC52'
+    },
+
+    userName: {
+        fontSize: 16
     }
 
 }

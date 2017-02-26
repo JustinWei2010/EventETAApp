@@ -1,42 +1,40 @@
 'use strict'
 import moment from 'moment'
-import { Button, Container, Content, Header, Icon, Title } from 'native-base/backward'
-import { StyleProvider,getTheme } from 'native-base';
-import material from 'app/native-base-theme/variables/material';
+import { Body, Button, Container, Content, getTheme, Header, Icon, Left, Right, StyleProvider, Title, View } from 'native-base'
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { openDrawer } from 'app/actions/drawer'
 import EventList from 'app/components/EventList'
+import material from 'app/native-base-theme/variables/material'
 
 class HomeScreen extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
-    //Adding all events for easy testing
     render() {
         const filteredEvents = this._filterEventsByDay(this.props.events)
         return (
             <Container style={styles.container}>
                 <Header>
-                    <Button transparent onPress={this._onClickMenuButton}>
-                        <Icon name='ios-menu' />
-                    </Button>
-                    <Title>ETA</Title>
+                    <Left>
+                        <Button transparent onPress={this._onClickMenuButton}>
+                            <Icon name='ios-menu' />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>ETA</Title>
+                    </Body>
+                    <Right />
                 </Header>
-                <StyleProvider  style={getTheme(material)}>
-                <Content>
-                    <EventList title="Current Events"
-                            events={filteredEvents.current} />
+                <StyleProvider style={getTheme(material)}>
+                    <Content>
+                        <EventList title='Current Events'
+                                events={filteredEvents.current} />
 
-                    <EventList title="Upcoming Events"
-                            events={filteredEvents.upcoming} />
+                        <EventList title='Upcoming Events'
+                                events={filteredEvents.upcoming} />
 
-                    <EventList title="Past Events"
-                            events={filteredEvents.past} />
-                </Content>
+                        <EventList title='Past Events'
+                                events={filteredEvents.past} />
+                    </Content>
                 </StyleProvider>
             </Container>
         )
@@ -56,11 +54,11 @@ class HomeScreen extends Component {
         const currentEnd = moment(currentStart).add(1, 'd').subtract(1, 's')
         const upcomingStart = moment(currentStart).add(1, 'd')
         const upcomingEnd = moment(upcomingStart).add(2, 'M').subtract(1, 's')
-        //const pastStart = moment(currentStart).subtract(2, 'w')
+        const pastStart = moment(currentStart).subtract(2, 'w')
         const pastEnd = moment(currentStart).subtract(1, 's')
 
         // Use this for past start if you need to test more events
-        const pastStart = moment(currentStart).subtract(12, 'M')   
+        //const pastStart = moment(currentStart).subtract(12, 'M')   
 
         events.forEach((event) => {
             const eventTime = moment(event.startTime)

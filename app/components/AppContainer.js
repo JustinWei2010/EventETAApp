@@ -1,17 +1,17 @@
 'use strict'
-import { Container } from 'native-base/backward'
+import _ from 'lodash'
+import { Container } from 'native-base'
 import React, { Component } from 'react'
 import { BackAndroid, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import _ from 'lodash'
-import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 
-import SideBarContainer from 'app/components/SideBarContainer'
 import EventDetailsScreen from 'app/screens/EventDetailsScreen'
 import EventUpdateETAScreen from 'app/screens/EventUpdateETAScreen'
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
+import SideBarContainer from 'app/components/SideBarContainer'
 import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
 

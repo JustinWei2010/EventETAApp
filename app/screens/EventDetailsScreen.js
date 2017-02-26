@@ -1,12 +1,9 @@
 'use strict'
-import { Content, Title, Header, Button, Icon } from 'native-base/backward'
-import { Container, Footer, Text, View, Spinner } from 'native-base'
+import { Body, Button, Container, Content, Footer, Header, Icon, Left, Right, Text, Title, View, Spinner } from 'native-base'
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { StyleProvider,getTheme } from 'native-base';
-import material from 'app/native-base-theme/variables/material';
 import EventDetails from 'app/components/EventDetails'
 import EventETAList from 'app/components/EventETAList'
 import * as events from 'app/actions/events'
@@ -14,10 +11,6 @@ import * as firebase from 'app/api/firebase'
 import * as navigation from 'app/actions/navigation'
 
 class EventDetailsScreen extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     handleReceivedEventETAs(etas) {
         this.props.actions.receivedEventETAs(etas)
@@ -42,14 +35,19 @@ class EventDetailsScreen extends Component {
         return (
             <Container style={styles.container}>
                 <Header>
-                    <Button transparent onPress={this._onClickBackButton}>
-                        <View>
-                            <Icon style={styles.backIcon} name='ios-arrow-back' />
-                        </View>
-                    </Button>
-                    <Title ellipsizeMode='tail' numberOfLines={1} style={styles.title}>
+                    <Left>
+                        <Button transparent onPress={this._onClickBackButton}>
+                            <View>
+                                <Icon style={styles.backIcon} name='ios-arrow-back' />
+                            </View>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title ellipsizeMode='tail' numberOfLines={1} >
                             {event.name}
-                    </Title>
+                        </Title>
+                    </Body>
+                    <Right />
                 </Header>
                 <Content>
                     <EventDetails event={event} />
@@ -122,11 +120,6 @@ const styles = {
 
     container: {
         backgroundColor: 'white',
-    },
-
-    title: {
-        marginHorizontal: 50,
-        textAlign: 'center'
     },
 
     footer: {

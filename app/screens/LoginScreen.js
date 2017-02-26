@@ -1,7 +1,7 @@
 'use strict'
-import { Container, Text, View } from 'native-base/backward'
+import { Container, Text, View } from 'native-base'
 import React, { Component } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image } from 'react-native'
 import Carousel from 'react-native-looped-carousel'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
@@ -20,13 +20,13 @@ class LoginScreen extends Component {
                         bullets>
                         <Image 
                             style={styles.carouselImage}
-                            source={require("app/resources/sample1.jpg")} />
+                            source={require('app/resources/sample1.jpg')} />
                         <Image 
                             style={styles.carouselImage}
-                            source={require("app/resources/sample2.jpg")} />
+                            source={require('app/resources/sample2.jpg')} />
                         <Image 
                             style={styles.carouselImage}
-                            source={require("app/resources/sample3.jpg")} />
+                            source={require('app/resources/sample3.jpg')} />
                     </Carousel>
                     <Icon.Button 
                         name='facebook'
@@ -54,15 +54,6 @@ export default connect(state => ({
 
 const styles = {
 
-    container: {
-        backgroundColor: 'white'
-    },
-
-    content: {
-        flex: 1,
-        margin: 30
-    },
-
     carousel: {
         flex: 1,
         marginBottom: 20
@@ -73,5 +64,15 @@ const styles = {
         height: null,
         width: null,
         resizeMode:'stretch'
+    },
+
+    container: {
+        backgroundColor: 'white'
+    },
+
+    content: {
+        flex: 1,
+        margin: 30
     }
+
 }

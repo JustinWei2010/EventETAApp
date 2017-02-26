@@ -1,5 +1,5 @@
 'use strict'
-import { Content, Text, List, ListItem, Thumbnail, View } from 'native-base/backward'
+import { Content, Text, List, ListItem, Thumbnail, View } from 'native-base'
 import { Icon } from 'native-base'
 import React, { Component } from 'react'
 import { Platform, StyleSheet } from 'react-native'
@@ -15,7 +15,7 @@ class SideBar extends Component {
             <Content style={styles.sidebar}>
                 <View style={styles.profileContainer}>
                     <View style={styles.profileIcon}>
-                        <Thumbnail size={60} source={this.props.profile.src} />
+                        <Thumbnail source={this.props.profile.src} />
                     </View>
                     <View style={styles.profileInfo}>
                         <Text style={styles.profileName}>{this.props.profile.name}</Text>
@@ -25,10 +25,10 @@ class SideBar extends Component {
                 <List>   
                     <ListItem button iconLeft onPress={this._onClickLogoutButton}>
                         <View style={styles.listItemContainer}>
-                            <View>
-                                <Icon name="md-power" style={styles.sidebarIcon} />
+                            <Icon name='md-power' />
+                            <View style={styles.listItemTextContainer}>
+                                <Text style={styles.listItemText}>Logout</Text>
                             </View>
-                            <Text style={styles.text}>  Logout</Text>
                         </View>
                     </ListItem>
                 </List>
@@ -53,9 +53,19 @@ export default connect(state => ({
 
 const styles = {
 
-    sidebar: {
-        flex: 1,
-        backgroundColor: '#fff'
+    listItemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+
+    listItemText: {
+        fontWeight: '500',
+        fontSize: 16
+    },
+
+    listItemTextContainer: {
+        paddingLeft: 40
     },
 
     profileContainer: {
@@ -82,30 +92,9 @@ const styles = {
         color: 'grey'
     },
 
-    listItemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
- 
-    iconContainer: {
-        width: 37,
-        height: 37,
-        borderRadius: 18,
-        marginRight: 12,
-        paddingLeft: 11,
-        paddingTop: (Platform.OS === 'android') ? 7 : 5
-    },
-
-    sidebarIcon: {
-        fontSize: 21,
-        color: 'red',
-        lineHeight: (Platform.OS === 'android') ? 21 : 25,
-        backgroundColor: 'transparent'
-    },
-
-    text: {
-        fontWeight: '500',
-        fontSize: 16
+    sidebar: {
+        flex: 1,
+        backgroundColor: '#fff'
     }
+
 }

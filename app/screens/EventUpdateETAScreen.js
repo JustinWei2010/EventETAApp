@@ -1,14 +1,12 @@
 'use strict'
-import { Button, Container, Content, Text, Card, CardItem, List, ListItem, Header, Icon, Title } from 'native-base/backward'
+import { Body, Button, Card, CardItem, Container, Content, Header, Icon, Left, List, ListItem, Right, Text, Title } from 'native-base'
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import { StyleProvider,getTheme } from 'native-base';
-import material from 'app/native-base-theme/variables/material';
+import { StyleProvider, getTheme } from 'native-base'
 import * as events from 'app/actions/events'
 import * as navigation from 'app/actions/navigation'
+import material from 'app/native-base-theme/variables/material'
 
 const etaSuggestions = [
     {
@@ -38,30 +36,32 @@ const etaSuggestions = [
 ]
 
 class EventUpdateETAScreen extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
             <Container style={styles.container}>
                 <Header>
-                    <Button transparent onPress={this._onClickBackButton}>
-                        <Icon name='ios-arrow-back' />
-                    </Button>
-                    <Title>Update ETA</Title>
+                    <Left>
+                        <Button transparent onPress={this._onClickBackButton}>
+                            <Icon name='ios-arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Title>Update ETA</Title>
+                    </Body>
+                    <Right />
                 </Header>
-                <StyleProvider  style={getTheme(material)}>
-                <Content>
-                    <Card>
-                        <CardItem header>
-                            <Text>ETA Suggestions</Text>
-                        </CardItem>
-                        <List dataArray={etaSuggestions}
-                            renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
-                        </List>
-                    </Card>
-                </Content>
+                <StyleProvider style={getTheme(material)}>
+                    <Content>
+                        <Card>
+                            <CardItem header>
+                                <Text>ETA Suggestions</Text>
+                            </CardItem>
+                            <List dataArray={etaSuggestions}
+                                renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
+                            </List>
+                        </Card>
+                    </Content>
                 </StyleProvider>
             </Container>
         )
