@@ -49,15 +49,18 @@ class HomeScreen extends Component {
             past: []
         }
 
-        // current: beginning of today to 11:59:59 today
-        // upcoming: beginning of tomorrow to 1 month later
-        // past: 2 weeks ago to 23:59:59 yesterday
+        // Current Events: beginning of today to 11:59:59 today
+        // Upcoming Events: beginning of tomorrow to 2 months later
+        // Past Events: 2 weeks ago to 23:59:59 yesterday
         const currentStart = moment().startOf('d')
         const currentEnd = moment(currentStart).add(1, 'd').subtract(1, 's')
         const upcomingStart = moment(currentStart).add(1, 'd')
         const upcomingEnd = moment(upcomingStart).add(2, 'M').subtract(1, 's')
-        const pastStart = moment(currentStart).subtract(2, 'w')
+        //const pastStart = moment(currentStart).subtract(2, 'w')
         const pastEnd = moment(currentStart).subtract(1, 's')
+
+        // Use this for past start if you need to test more events
+        const pastStart = moment(currentStart).subtract(12, 'M')   
 
         events.forEach((event) => {
             const eventTime = moment(event.startTime)

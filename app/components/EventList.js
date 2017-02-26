@@ -25,7 +25,7 @@ class EventList extends Component {
 	_renderEvent = (event) => {
         return (
             <ListItem style={{flex:1}} button onPress={() => this._onClickEvent(event)}>
-                <Thumbnail square size={100} source={{uri: event.source.uri}} />
+                <Thumbnail square size={100} source={event.thumbnail} />
                 <Text>{event.name}</Text>
                 <Text note>{formatDate(event.startTime)}</Text>
                 <Text note>{event.place}</Text>
@@ -42,16 +42,16 @@ class EventList extends Component {
 
 }
 
-const styles = {
-    label: {
-        fontWeight: "600",
-        fontStyle: "italic",
-    }
-}
-
 export default connect(state => ({
 	}),
 	(dispatch) => ({
     	actions: bindActionCreators(navigation, dispatch)
 	})
 )(EventList)
+
+const styles = {
+    label: {
+        fontWeight: "600",
+        fontStyle: "italic",
+    }
+}

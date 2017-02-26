@@ -9,10 +9,9 @@ import { StyleProvider,getTheme } from 'native-base';
 import material from 'app/native-base-theme/variables/material';
 import EventDetails from 'app/components/EventDetails'
 import EventETAList from 'app/components/EventETAList'
-import * as firebase from 'app/api/firebase'
 import * as events from 'app/actions/events'
+import * as firebase from 'app/api/firebase'
 import * as navigation from 'app/actions/navigation'
-import {watchForEventETAs, stopWatchForEventETAs} from 'app/api/firebase'
 
 class EventDetailsScreen extends Component {
 
@@ -28,14 +27,14 @@ class EventDetailsScreen extends Component {
         // register watching for event etas from firebase
         this.props.actions.refreshEventAttendeesAndETAs(this.props.data.event)
 
-        watchForEventETAs(
+        firebase.watchForEventETAs(
             this.props.data.event,
             this.handleReceivedEventETAs.bind(this))
     }
 
     componentWillUnmount() {
         // deregister watching for event etas from firebase
-        stopWatchForEventETAs(this.props.data.event)
+        firebase.stopWatchForEventETAs(this.props.data.event)
     }
 
     render() {
@@ -48,7 +47,7 @@ class EventDetailsScreen extends Component {
                             <Icon style={styles.backIcon} name='ios-arrow-back' />
                         </View>
                     </Button>
-                    <Title ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
+                    <Title ellipsizeMode='tail' numberOfLines={1} style={styles.title}>
                             {event.name}
                     </Title>
                 </Header>
@@ -62,34 +61,34 @@ class EventDetailsScreen extends Component {
     }
 
     _renderFooter = () => {
-        const myFacebookUserId = firebase.getFacebookUserId()
-
-        if (this.props.attendees.length > 0) {
-            const attendee = this.props.attendees.find(x => x.id == myFacebookUserId)
-            var foundETA = _.find(this.props.etas, eta => eta.facebookUserId == attendee.id)
-            if (foundETA && foundETA.hasArrived) {
+        const curUserId = firebase.getFacebookUserId()
+        if (this.props.attendees && this.props.attendees.length > 0) {
+            const curUser = _.find(this.props.attendees, attendee => curUserId && attendee.id === curUserId)
+            const curUserETA = _.find(this.props.etas, eta => curUser && eta.facebookUserId === curUser.id)
+            if (curUserETA && curUserETA.hasArrived) {
                 return (
                     <Footer>
-                        <Button block onPress={this._onClickCheckInButton.bind(this)} style={styles.checkedInButton}>
+                        <Button block onPress={this._onClickCheckInButton} style={styles.checkedInButton}>
                             <View style={styles.footer}>
-                                <Icon style={styles.checkedInIcon} name="md-checkmark" />
+                                <Icon style={styles.checkedInIcon} name='md-checkmark' />
                                 <Text style={styles.checkedInText}>Arrived</Text>
-                            </View>
-                        </Button>
-                    </Footer>
-                )
-            } else {
-                return (
-                    <Footer>
-                        <Button block onPress={this._onClickCheckInButton.bind(this)} style={styles.notCheckedInButton}>
-                            <View style={styles.footer}>
-                                <Text style={styles.notCheckedInText}>Check In</Text>
                             </View>
                         </Button>
                     </Footer>
                 )
             }
         }
+
+        // TODO: Need to handle case where loading in different event page. Currently bug, cause it shows previous check in state.
+        return (
+            <Footer>
+                <Button block onPress={this._onClickCheckInButton} style={styles.notCheckedInButton}>
+                    <View style={styles.footer}>
+                        <Text style={styles.notCheckedInText}>Check In</Text>
+                    </View>
+                </Button>
+            </Footer>
+        )
     }
 
     _onClickBackButton = () => {
@@ -97,15 +96,14 @@ class EventDetailsScreen extends Component {
     }
 
     _onClickCheckInButton = () => {
-        const facebookUserId = firebase.getFacebookUserId()
-        const attendee = this.props.attendees.find(x => x.id == facebookUserId)
-        if (attendee) {
+        // Keep in mind that this won't work if there are a lot of people attending event and you aren't returned in attendee list
+        const curUserId = firebase.getFacebookUserId()
+        const curUser = _.find(this.props.attendees, attendee => curUserId && attendee.id === curUserId)
+        if (curUser) {
             this.props.actions.checkInEvent(
                 this.props.data.event,
-                attendee
+                curUser
             )
-        } else {
-            console.error('User not an attendee of event -- cannot checkIn.')
         }
     }
 
