@@ -58,9 +58,7 @@ export const checkInEvent = (event, attendee) => {
 
 export const clearEventAttendeesAndETAs = () => {
     return {
-        type: types.CLEAR_EVENT_ATTENDEES_AND_ETAS,
-        attendee: null,
-        etas: null
+        type: types.CLEAR_EVENT_ATTENDEES_AND_ETAS
     }
 }
 
