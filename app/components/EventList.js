@@ -28,7 +28,7 @@ class EventList extends Component {
                 <Thumbnail square size={100} source={event.thumbnail} />
                 <Text>{event.name}</Text>
                 <Text note>{formatDate(event.startTime)}</Text>
-                <Text note>{event.place}</Text>
+                <Text note>{event.place.name}</Text>
             </ListItem>
         )
 	}

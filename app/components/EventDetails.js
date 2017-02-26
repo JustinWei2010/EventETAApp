@@ -1,4 +1,5 @@
 'use strict'
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { formatDate } from 'app/utils/dateFormatter'
@@ -29,7 +30,7 @@ export default class EventDetails extends Component {
                         <Text style={styles.date}>{formatDate(this.props.event.startTime)}</Text>
 
                         <TouchableOpacity onPress={this._onClickLocation}>
-                            <Text style={styles.descriptionSeeMore}>{this.props.event.place}</Text>
+                            <Text style={styles.descriptionSeeMore}>{this.props.event.place.name}</Text>
                         </TouchableOpacity> 
 
                         {this._renderEventDescription()}   
@@ -41,7 +42,7 @@ export default class EventDetails extends Component {
     }
 
     _onClickLocation = () => {
-        map.showAddressDirections(this.props.event.place)
+        map.showDirections(this.props.event.place)
     }
 
     _onToggleCollapseDetails = () => {

@@ -21,30 +21,17 @@ const eventList = (state = _initialState, action = {}) => {
     }
 }
 
-const _formatFacebookLocationAddress = (place) => {
-    console.log(place)
-    var address = ''
-    if (place) {
-
+const _formatFacebookEventThumbnail = (cover) => {
+    // Need to make default picture consistent with details page, should not be on external site in case of no internet
+    var source = {
+        uri: 'https://facebook.github.io/react/img/logo_og.png'
     }
-    return address
-}
 
-const _formatFacebookLocationName = (place) => {
-    return place ? place.name : ''
-}
-
- const _formatFacebookEventThumbnail = (cover) => {
-        // Need to make default picture consistent with details page, should not be on external site in case of no internet
-        var source = {
-            uri: 'https://facebook.github.io/react/img/logo_og.png'
-        }
-
-        if (cover && cover.source) {
-            source.uri = cover.source
-        }
-        return source
+    if (cover && cover.source) {
+        source.uri = cover.source
     }
+    return source
+}
 
 const _formatFacebookEventCover = (cover) => {
     if (cover && cover.source) {
@@ -60,8 +47,7 @@ const _formatFacebookEvent = (event) => {
         id: event.id,
         type: EVENT_TYPE.FACEBOOK,
         name: event.name,
-        place: _formatFacebookLocationName(event.place),
-        address: _formatFacebookLocationAddress(event.place),
+        place: event.place ? event.place : {},
         startTime: event.start_time,
         description: event.description,
         attendingCount: event.attending_count,

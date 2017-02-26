@@ -1,20 +1,40 @@
 'use strict'
+import _ from 'lodash'
 import { Linking, Platform } from 'react-native'
 
-const _getBaseMapURL = () => {
-    var url = ''
-    if (Platform.OS === 'ios') {
-        // Native apple maps app
-        url = 'http://maps.apple.com/?address='
-    } else if (Platform.OS === 'android') {
-        // Native google maps app
-        url = 'geo:0,0?q='
+var _baseURL = ''
+
+const _buildBaseURL = () => {
+    if (_.isEmpty(_baseURL)) {
+        if (Platform.OS === 'ios') {
+            // Native apple maps app
+            _baseURL = 'http://maps.apple.com/?q='
+        } else if (Platform.OS === 'android') {
+            // Native google maps app
+            _baseURL = 'geo:0,0?q='
+        } else {
+            console.error("Can't build map url since device OS is not recognized. OS: " + Platform.OS)
+        }           
     }    
-    return url
 }
 
-export const showAddressDirections = (address) => {
-    const url = _getBaseMapURL() + address
+const _buildMapURL = (place) => {
+    _buildBaseURL()
+
+    var url = _baseURL + place.name
+    if (place.location) {
+        const latitude = place.location.latitude
+        const longitude = place.location.longitude
+        if (latitude && longitude) {
+            url = `${_baseURL}${latitude},${longitude}`
+        }
+    }
+    console.log(`Opening map app with url: ${url}`)
+    return url;
+}
+
+export const showDirections = (place) => {
+    const url = _buildMapURL(place)
     Linking.canOpenURL(url).then(supported => {
         if (!supported) {
         console.log('Not supported on device Url: ' + url);
