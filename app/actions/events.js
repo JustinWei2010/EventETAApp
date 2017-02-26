@@ -63,3 +63,15 @@ export const clearEventAttendeesAndETAs = () => {
         etas: null
     }
 }
+
+export const requestETA = (event, attendee, requestedByName) => {
+    console.log('Request ETA', event, attendee, requestedByName)
+    return {
+        type: types.REQUEST_ETA,
+        details: {
+            event: event,
+            attendee: attendee,
+            requestedByName: requestedByName
+        }
+    }
+}

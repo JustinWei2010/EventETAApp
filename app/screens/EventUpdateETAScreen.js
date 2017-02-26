@@ -38,6 +38,7 @@ const etaSuggestions = [
 class EventUpdateETAScreen extends Component {
 
     render() {
+        const event = this.props.data
         return (
             <Container style={styles.container}>
                 <Header>
@@ -55,8 +56,9 @@ class EventUpdateETAScreen extends Component {
                     <Content>
                         <Card>
                             <CardItem header>
-                                <Text>ETA Suggestions</Text>
+                                <Text>{event.name}</Text>
                             </CardItem>
+                            <Text>I'll be there in...</Text>
                             <List dataArray={etaSuggestions}
                                 renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
                             </List>

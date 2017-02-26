@@ -21,6 +21,15 @@ function* _updateEventETA(action) {
     }
 }
 
+function* _requestETA(action) {
+    try {
+        yield call(firebase.requestETA, action.details.event, action.details.attendee, action.details.requestedByName)
+    } catch(error) {
+        console.log("Error when requesting event eta.")
+        console.log(error)
+    }
+}
+
 function* _refreshEventAttendeesAndETAs(action) {
     try {
         const attendees = yield call(facebook.getUsersAttendingEvent, action.event.id)
@@ -61,4 +70,8 @@ export function* watchForWaitForEventETAs() {
 
 export function* watchForRefreshEventAttendeesAndETAs() {
     yield takeLatest(types.REFRESH_EVENT_ATTENDEES_AND_ETAS, _refreshEventAttendeesAndETAs)
+}
+
+export function* watchForRequestETA() {
+    yield takeLatest(types.REQUEST_ETA, _requestETA)
 }

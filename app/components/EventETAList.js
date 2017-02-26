@@ -9,6 +9,7 @@ import _ from 'lodash'
 import { formatDate } from 'app/utils/dateFormatter'
 import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
+import * as events from 'app/actions/events'
 import * as firebase from 'app/api/firebase'
 
 class EventETAList extends Component {
@@ -29,8 +30,8 @@ class EventETAList extends Component {
         )
     }
 
-    _onClickRequestETAButton = () => {
-
+    _onClickRequestETAButton = (attendee) => {
+        this.props.actions.requestETA(this.props.event, attendee, this.props.profile.name)
     }
 
     _onClickUpdateETAButton = () => {
@@ -40,13 +41,18 @@ class EventETAList extends Component {
     _renderETAButton = (attendee) => {
         if (attendee.id === firebase.getFacebookUserId()) {
             return (
-                <Button style={styles.updateETAButton} onPress={this._onClickUpdateETAButton}>
-                    <Text>Update ETA</Text>
-                </Button>
+                <View>
+                    <Button style={styles.updateETAButton} onPress={this._onClickUpdateETAButton}>
+                        <Text>Update ETA</Text>
+                    </Button>
+                    <Button onPress={() => this._onClickRequestETAButton(attendee)}>
+                        <Text>Request ETA</Text>
+                    </Button>
+                </View>
             )
         } else {
             return (
-                <Button onPress={this._onClickRequestETAButton}>
+                <Button onPress={() => this._onClickRequestETAButton(attendee)}>
                     <Text>Request ETA</Text>
                 </Button>
             )
@@ -96,17 +102,18 @@ class EventETAList extends Component {
 }
 
 export default connect(state => ({
-    eventETAList: state.eventETAList
+    eventETAList: state.eventETAList,
+    profile: state.profile
     }),
     (dispatch) => ({
-        actions: bindActionCreators(navigation, dispatch)
+        actions: bindActionCreators({ ...events, ...navigation }, dispatch)
     })
 )(EventETAList)
 
 const styles = {
 
     attendingCountBadge: {
-        backgroundColor: 'green', 
+        backgroundColor: 'green',
         marginLeft: 10
     },
 

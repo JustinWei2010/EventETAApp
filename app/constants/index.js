@@ -19,3 +19,8 @@ export const EVENT_TYPE = {
     FACEBOOK: 'facebook'
 }
 
+// Notification Types
+export const NOTIFICATION_TYPE = {
+    ARRIVED: 'Arrived',
+    REQUEST_ETA: 'RequestETA'
+}

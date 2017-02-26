@@ -28,6 +28,10 @@ export const loginWithFacebookUser = (accessToken) => {
       console.log("Authenticated with firebase!");
       facebookUserId = credData.providerData.find(
         provider => provider.providerId === "facebook.com").uid
+      firebase.database().ref('/queue/login/tasks')
+      .push({
+        firebaseUserId: firebase.auth().currentUser.uid
+      })
     }).catch(err => {
       console.log("Error authenticating with firebase! " + err);
     })
@@ -93,4 +97,23 @@ export const subscribeToArrived = (event) => {
     console.log(`Subscribing to arrived events for facebook event id ${event.id}`)
     FCM.subscribeToTopic(`/topics/arrived-facebook-${event.id}`);
   }
+}
+
+export const subscribeToRequestETA = () => {
+  const firebaseUserId = firebase.auth().currentUser.uid;
+  FCM.subscribeToTopic(`/topics/requestETA-${firebaseUserId}`);
+}
+
+export const requestETA = (event, attendee, requestedByName) => {
+  const firebaseUserId = firebase.auth().currentUser.uid;
+
+  firebase.database().ref('/queue/requestETA/tasks')
+    .push({
+      eventType: event.type,
+      eventId: event.id,
+      userId: attendee.id,
+      requestedById: firebaseUserId,
+      requestedByName: requestedByName,
+      timestamp: new Date().getDate()
+    })
 }

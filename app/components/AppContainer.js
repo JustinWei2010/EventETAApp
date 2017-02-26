@@ -12,89 +12,19 @@ import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, 
 import HomeScreen from 'app/screens/HomeScreen'
 import LoginScreen from 'app/screens/LoginScreen'
 import SideBarContainer from 'app/components/SideBarContainer'
+import * as fcm from 'app/api/fcm'
 import * as constants from 'app/constants'
 import * as navigation from 'app/actions/navigation'
 
 class AppContainer extends Component {
-
-    setupFCM() {
-        FCM.requestPermissions() // for iOS
-        FCM.getFCMToken().then(token => {
-            console.log(token)
-            // store fcm token in your server
-        });
-        this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
-            // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-            if(notif.local_notification){
-              //this is a local notification
-              console.log("Local notification")
-            }
-            if(notif.opened_from_tray){
-              //app is open/resumed because user clicked banner
-              console.log("Opened from tray")
-
-              console.log(notif)
-                console.log(`Should navigate to event ${notif.eventId}`)
-                if (notif.eventId) {
-                    const event = _.find(this.props.eventList, e => e.id == notif.eventId);
-                    if (event) {
-                        // TODO: Populate this correctly
-                        const data = { event }
-                    // TODO: If already on the page, should refresh it!
-                    this.props.actions.navigateTo(constants.SCREEN.EVENT_DETAILS, data)
-                    }
-
-                }
-            } else {
-                // show a toast or some other message that a user has arrived?
-
-            }
-
-
-
-            //await someAsyncCall()
-
-            if(Platform.OS === 'ios'){
-              //optional
-              //iOS requires developers to call completionHandler to end notification process. If you do not call it your background remote notifications could be throttled, to read more about it see the above documentation link.
-              //This library handles it for you automatically with default behavior (for remote notification, finish with NoData; for WillPresent, finish depend on "show_in_foreground"). However if you want to return different result, follow the following code to override
-              //notif._notificationType is available for iOS platfrom
-              switch(notif._notificationType){
-                case NotificationType.Remote:
-                  notif.finish(RemoteNotificationResult.NewData) //other types available: RemoteNotificationResult.NewData, RemoteNotificationResult.ResultFailed
-                  break;
-                case NotificationType.NotificationResponse:
-                  notif.finish();
-                  break;
-                case NotificationType.WillPresent:
-                  notif.finish(WillPresentNotificationResult.All) //other types available: WillPresentNotificationResult.None
-                  break;
-              }
-            }
-        })
-
-        this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
-            console.log(token)
-            // fcm token may not be available on first load, catch it here
-        })
-
-        console.log('Completed FCM setup')
-    }
-
-    cleanupFCM() {
-        // stop listening for events
-        this.notificationListener.remove()
-        this.refreshTokenListener.remove()
-    }
-
     componentDidMount() {
-        this.setupFCM()
+        fcm.setupFCM(this._handleNotification)
         //Mount Callback for popping history when back button is pressed on android
         BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
     }
 
     componentWillUnmount() {
-        this.cleanupFCM()
+        fcm.cleanupFCM()
         BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction);
     }
 
@@ -146,6 +76,37 @@ class AppContainer extends Component {
         return true
     }
 
+    _handleNotification = (notif) => {
+        // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+        if(notif.local_notification){
+            //this is a local notification
+            console.log("Local notification")
+        }
+        if(notif.opened_from_tray){
+            //app is open/resumed because user clicked banner
+            console.log("Opened from tray")
+
+            console.log(`Should navigate to event ${notif.eventId}`)
+            const event = _.find(this.props.eventList, e => e.id == notif.eventId
+                        && e.type == notif.eventType);
+            switch(notif.notificationType) {
+                case constants.NOTIFICATION_TYPE.ARRIVED:
+                    if (event) {
+                        // TODO: Populate this correctly
+                        const data = { event }
+                        // TODO: If already on the page, should refresh it!
+                        this.props.actions.navigateTo(constants.SCREEN.EVENT_DETAILS, data)
+                    }
+                    break;
+                case constants.NOTIFICATION_TYPE.REQUEST_ETA:
+                    if (event) {
+                        this.props.actions.navigateTo(constants.SCREEN.EVENT_UPDATE_ETA, event)
+                    }
+            }
+        }
+
+        // TODO: Else show a toast or some other message that a user has arrived?
+    }
 }
 
 export default connect(state => ({

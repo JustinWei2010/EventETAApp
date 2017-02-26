@@ -39,6 +39,7 @@ export function* postLoginProcess() {
     if (fbToken) {
         try {
             yield call(firebase.loginWithFacebookUser, fbToken)
+            yield call(firebase.subscribeToRequestETA)
             yield [
                 call(fetchFBProfile),
                 call(fetchFBEvents)
@@ -52,7 +53,7 @@ export function* postLoginProcess() {
     } else {
         console.log("Facebook token is null")
     }
-    
+
     //Navigate to login screen if not logged in or failure fetching needed fb data
     yield put(clearHistory())
     yield put(navigateTo(constants.SCREEN.LOGIN))
