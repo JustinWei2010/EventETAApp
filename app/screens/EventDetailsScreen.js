@@ -74,19 +74,18 @@ class EventDetailsScreen extends Component {
                         </Button>
                     </Footer>
                 )
+            } else {
+                return (
+                    <Footer>
+                        <Button block onPress={this._onClickCheckInButton} style={styles.notCheckedInButton}>
+                            <View style={styles.footer}>
+                                <Text style={styles.notCheckedInText}>Check In</Text>
+                            </View>
+                        </Button>
+                    </Footer>
+                )
             }
         }
-
-        // TODO: Need to handle case where loading in different event page. Currently bug, cause it shows previous check in state.
-        return (
-            <Footer>
-                <Button block onPress={this._onClickCheckInButton} style={styles.notCheckedInButton}>
-                    <View style={styles.footer}>
-                        <Text style={styles.notCheckedInText}>Check In</Text>
-                    </View>
-                </Button>
-            </Footer>
-        )
     }
 
     _onClickBackButton = () => {
