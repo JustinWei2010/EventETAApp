@@ -58,7 +58,9 @@ class EventUpdateETAScreen extends Component {
                             <CardItem header>
                                 <Text>{event.name}</Text>
                             </CardItem>
-                            <Text>I'll be there in...</Text>
+                            <CardItem>
+                                <Text>I'll be there in...</Text>
+                            </CardItem>
                             <List dataArray={etaSuggestions}
                                 renderRow={(etaSuggestion) => this._renderETASuggestion(etaSuggestion)}>
                             </List>

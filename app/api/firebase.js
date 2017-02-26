@@ -28,9 +28,12 @@ export const loginWithFacebookUser = (accessToken) => {
       console.log("Authenticated with firebase!");
       facebookUserId = credData.providerData.find(
         provider => provider.providerId === "facebook.com").uid
+
+      subscribeToRequestETA(credData.uid)
+
       firebase.database().ref('/queue/login/tasks')
       .push({
-        firebaseUserId: firebase.auth().currentUser.uid
+        firebaseUserId: credData.uid
       })
     }).catch(err => {
       console.log("Error authenticating with firebase! " + err);
@@ -99,8 +102,7 @@ export const subscribeToArrived = (event) => {
   }
 }
 
-export const subscribeToRequestETA = () => {
-  const firebaseUserId = firebase.auth().currentUser.uid;
+export const subscribeToRequestETA = (firebaseUserId) => {
   FCM.subscribeToTopic(`/topics/requestETA-${firebaseUserId}`);
 }
 
