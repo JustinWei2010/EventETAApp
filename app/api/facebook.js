@@ -1,7 +1,7 @@
 'use strict'
-import { AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
+import { AccessToken, GraphRequest, GraphRequestManager, LoginManager, MessageDialog } from 'react-native-fbsdk'
 
-export const login = async(readPermissions) => {
+export const login = async (readPermissions) => {
     const response = await LoginManager.logInWithReadPermissions(readPermissions)
     if (response.isCancelled) {
         console.log("Login cancelled")
@@ -11,12 +11,28 @@ export const login = async(readPermissions) => {
     }
 }
 
-export const logout = async() => {
+export const logout = async () => {
     await LoginManager.logOut()
 }
 
 export const getFbToken = () => {
     return AccessToken.getCurrentAccessToken()
+}
+
+// Request ETA using Facebook Message Dialog
+export const requestETAMessage = async (event) => {
+    const requestETAContent = {
+        contentType: 'link',
+        contentUrl: 'https://www.google.com/#q=' + event.name,
+        contentDescription: 'Whats your ETA'
+    }
+    const canShow = await MessageDialog.canShow(requestETAContent)
+    if (canShow) {
+        // Maybe want to return the promise from show, for error status
+        MessageDialog.show(requestETAContent)
+    } else {
+        console.log("Can't send request ETA message")
+    }
 }
 
 const _makeGraphRequest = (path, parameters) => {

@@ -10,6 +10,8 @@ import * as events from 'app/actions/events'
 import * as firebase from 'app/api/firebase'
 import * as navigation from 'app/actions/navigation'
 
+import { requestETAMessage } from 'app/api/facebook'
+
 class EventDetailsScreen extends Component {
 
     handleReceivedEventETAs(etas) {
@@ -50,7 +52,11 @@ class EventDetailsScreen extends Component {
                             {event.name}
                         </Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Button style={{backgroundColor: '#00CC52'}} onPress={() => this._onClickGetETAButton(this.props.data.event)}>
+                            <Text>Get ETA</Text>
+                        </Button>
+                    </Right>
                 </Header>
                 <Content>
                     <EventDetails event={event} />
@@ -59,6 +65,11 @@ class EventDetailsScreen extends Component {
                 {this._renderFooter()}
             </Container>
         )
+    }
+
+    // Test facebook MessageDialog api
+    _onClickGetETAButton = (event) => {
+        requestETAMessage(event)
     }
 
     _renderFooter = () => {
